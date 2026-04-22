@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.kiri{
+    width: 50%;
+    background: linear-gradient(135deg, #4e8c8a, #7bb3b0);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.kiri h1{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.kanan {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+}
+
+.kanan h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.kanan p {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.kanan input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.kanan button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #2f52b5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.kanan button:last-child {
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.kanan p:nth-of-type(3) {
+    text-align: center;
+    margin: 10px 0;
+}
