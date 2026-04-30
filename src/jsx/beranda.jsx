@@ -6,19 +6,19 @@ import paymentIcon from "../assets/dashboard/card.png";
 import Atas from "../assets/dashboard/atas.png";
 import Bawah from "../assets/dashboard/bawah.png";
 
-export default function Beranda() {
+function Beranda() {
   const navigate = useNavigate();
 
   const transactions = [
-    { name: "Seniaku",   date: "1 April, 17.20",  amount: "Rp 40.000",  icon: Bawah, type: "out" },
-    { name: "Leyi",      date: "11 Maret, 15.00",  amount: "Rp 50.000",  icon: Atas,  type: "in"  },
-    { name: "Indomaret", date: "11 Maret, 14.20",  amount: "Rp 100.000", icon: Bawah, type: "out" },
-    { name: "Meyy",      date: "8 Maret, 09.00",   amount: "Rp 15.000",  icon: Atas,  type: "in"  },
+    { name:"Seniaku", date: "1 April, 17.20", amount:"Rp 40.000", icon: Bawah, type: "out"},
+    { name:"Leyi", date: "11 Maret, 15.00", amount:"Rp 50.000", icon: Atas,  type: "in"},
+    { name:"Indomaret", date: "11 Maret, 14.20", amount:"Rp 100.000", icon: Bawah, type: "out"},
+    { name:"Meyy", date: "8 Maret, 09.00", amount:"Rp 15.000", icon: Atas, type: "in"},
   ];
 
   return (
-    <div className="w-full h-screen bg-[#ededed] overflow-hidden">
-      <div className="w-full h-[75px] bg-[#2f7181] flex items-center justify-between px-10">
+    <div className="w-full h-screen bg-white overflow-hidden">
+      <div className="w-full h-[75px] bg-[#126B7D] flex items-center justify-between px-10">
         <h1 className="text-white text-[28px] font-semibold">E-Wallet</h1>
         <img src={profileIcon} alt="Profile" className="w-[48px] h-[48px] cursor-pointer brightness-0 invert" onClick={() => navigate("/profile")}/>
       </div>
@@ -32,24 +32,24 @@ export default function Beranda() {
 
         <div className="grid grid-cols-[1.15fr_0.95fr] gap-6 h-[58vh]">
           <div className="flex flex-col gap-6">
-            <div className="bg-[#367789] rounded-[24px] p-4 shadow-md h-[160px]">
+            <div className="bg-[#126B7D] rounded-[24px] p-4 shadow-md h-[160px]">
               <div className="grid grid-cols-3 gap-4 h-full">
                 <div className="flex flex-col items-center justify-center gap-3 cursor-pointer" onClick={() => navigate("/IsiSaldo")}>
-                  <div className="bg-[#5aab7e] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
+                  <div className="bg-[#46A784] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
                     <img src={isiSaldo} alt="Isi Saldo" className="w-[36px] h-[36px] object-contain brightness-0 invert" />
                   </div>
                   <p className="text-white text-[13px] font-medium">Isi Saldo</p>
                 </div>
 
                 <div className="flex flex-col items-center justify-center gap-3 cursor-pointer" onClick={() => navigate("/transfer")}>
-                  <div className="bg-[#4a9ecf] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
+                  <div className="bg-[#3FA0D7] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
                     <img src={transferIcon} alt="Transfer" className="w-[36px] h-[36px] object-contain brightness-0 invert" />
                   </div>
                   <p className="text-white text-[13px] font-medium">Transfer</p>
                 </div>
 
                 <div className="flex flex-col items-center justify-center gap-3 cursor-pointer" onClick={() => navigate("/pembayaran")}>
-                  <div className="bg-[#9b6ecf] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
+                  <div className="bg-[#736FBB] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
                     <img src={paymentIcon} alt="Pembayaran" className="w-[36px] h-[36px] object-contain brightness-0 invert" />
                   </div>
                   <p className="text-white text-[13px] font-medium">Pembayaran</p>
@@ -57,7 +57,7 @@ export default function Beranda() {
               </div>
             </div>
 
-            <div className="bg-[#367789] rounded-[24px] p-5 flex-1 shadow-md">
+            <div className="bg-[#126B7D] rounded-[24px] p-5 flex-1 shadow-md">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-white text-[18px] font-medium">Grafik Pengeluaran</h3>
                 <p onClick={() => navigate("/grafikPengeluaran")} className="text-white text-[14px] cursor-pointer">Detail →</p>
@@ -74,7 +74,7 @@ export default function Beranda() {
             </div>
           </div>
 
-          <div className="bg-[#367789] rounded-[24px] p-5 shadow-md flex flex-col h-full">
+          <div className="bg-[#126B7D] rounded-[24px] p-5 shadow-md flex flex-col h-full">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-white text-[20px] font-medium">Riwayat Transaksi</h3>
               <p className="text-white text-[14px] cursor-pointer">Detail →</p>
@@ -100,3 +100,5 @@ export default function Beranda() {
     </div>
   );
 }
+
+export default Beranda;

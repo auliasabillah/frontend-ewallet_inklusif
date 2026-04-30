@@ -1,17 +1,16 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function grafikPengeluaran() {
     const navigate = useNavigate();
     return (
     <div className="min-h-screen bg-gray-200">
-        <div className="bg-teal-500 text-white p-4 flex items-center justify-between">
-            <span onClick={() => navigate("/beranda")} className="text-xl cursor-pointer">←</span>
+        <div className="bg-[#126B7D] text-white p-4 flex items-center justify-between">
+            <span onClick={() => navigate("/beranda")} className="text-xl cursor-pointer">⬅︎</span>
             <h1 className="font-semibold">Informasi Pembayaran</h1>
             <span>...</span>
         </div>
         <div className="p-8 grid grid-cols-2 gap-4 min-h-[80vh] items-center">
-            <div className="bg-teal-700 text-white p-10 rounded min-h-[80vh] items-center ">
+            <div className="bg-[#126B7D] text-white p-10 rounded min-h-[80vh] items-center ">
                 <h2 className="mb-4 font-bold">PAYMENT OVERVIEW</h2><br/>
                 <div className="border-b py-2 flex justify-between">
                     <span>Payment ID</span>
@@ -34,7 +33,7 @@ function grafikPengeluaran() {
                     <span className="text-red-400">Rp 500</span>
                 </div>
             </div>
-            <div className="bg-teal-700 text-white p-4 min-h-[80vh] items-center">
+            <div className="bg-[#126B7D] text-white p-4 min-h-[80vh] items-center">
                 <div>
                     <h2 className="font-bold">GRAFIK PENGELUARAN</h2>
                     <p className="text-center mt-2">FEBRUARI 2026</p>

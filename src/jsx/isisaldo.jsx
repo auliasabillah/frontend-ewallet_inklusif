@@ -1,86 +1,80 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import transferBank from "../assets/isisaldo/shopping.png";
 import virtualAcc from "../assets/isisaldo/card.png";
 import Minimarket from "../assets/isisaldo/place.png";
 import debitKredit from "../assets/isisaldo/paypal.png";
+import alfamartLogo from "../assets/isisaldo/Alfamart.png";
+import indomaretLogo from "../assets/isisaldo/Indomaret.png";
+import bcaLogo from "../assets/isisaldo/BCA.png";
+import briLogo from "../assets/isisaldo/BRI.png";
+import bniLogo from "../assets/isisaldo/BNI.png";
+import mandiriLogo from "../assets/isisaldo/Mandiri.png";
+import tokoLogo from "../assets/isisaldo/tokoTerdekat.png";
 
-export default function IsiSaldoPage() {
+function IsiSaldo() {
     const navigate = useNavigate();
-    const [nominal, setNominal] = useState(0);
-    const [selectedMethod, setSelectedMethod] = useState("");
-    let adminFee = 0;
-    if (nominal > 0) {adminFee = 1000;}
-    const totalBayar = nominal + adminFee;
-    const quickAmounts = [10000, 15000, 20000, 50000, 100000];
     return (
-    <div className="w-full min-h-screen bg-[#ececec]">
-        <div className="w-full h-[85px] bg-[#367789] flex items-center px-6">
-            <button onClick={() => navigate("/beranda")} className="text-white text-[34px] mr-4">←</button>
-            <h1 className="text-white text-[22px] font-medium">Isi Saldo</h1>
+    <div className="min-h-screen bg-white">
+        <div className="bg-[#126B7D] text-white p-4 flex items-center gap-3">
+            <span onClick={() => navigate("/beranda")} className="text-xl cursor-pointer">⬅︎</span>
+            <h1 className="text-lg">Isi Saldo</h1>
         </div>
-        <div className="px-8 py-6">
-            <h2 className="text-[18px] text-black">Saldo Anda</h2>
-            <p className="text-[26px] font-bold text-[#68bb91]">Rp 2.000.000</p>
-            <h2 className="text-[18px] text-black mt-6 mb-3">Nominal Top Up</h2>
-            <input type="number" value={nominal} onChange={(e) => setNominal(Number(e.target.value))} className="w-full bg-[#367789] text-white text-[24px] font-semibold rounded-[10px] px-6 py-5 outline-none" placeholder="Rp 0"/>
-            <div className="grid grid-cols-5 gap-4 mt-4"> 
-                {quickAmounts.map((amount) => {
-                    return (
-                    <button key={amount} onClick={() => setNominal(amount)} className="bg-[#367789] text-white rounded-[8px] py-3 text-[18px]"> Rp {amount.toLocaleString("id-ID")}</button>
-                );
-                })}
-            </div>
-            <h2 className="text-[18px] text-black mt-8 mb-3">Metode Pembayaran</h2>
-            <div className="flex flex-col gap-3">
-                <button onClick={() => setSelectedMethod("bank")} className={`bg-[#5f9ccc] rounded-[10px] px-6 py-4 flex items-center gap-5 ${selectedMethod === "bank" ? "ring-4 ring-white" : ""}`}>
-                    <img src={transferBank} alt="Transfer Bank" className="w-[45px] h-[45px] object-contain brightness-0 invert"/>
-                    <div className="text-left">
-                        <h3 className="text-white text-[20px] font-semibold">Transfer Bank</h3>
-                        <p className="text-white text-[14px]">BRI, BNI, BCA, Mandiri, dll</p>
-                    </div>
-                </button>
-                <button onClick={() => setSelectedMethod("va")} className={`bg-[#7772be] rounded-[10px] px-6 py-4 flex items-center gap-5 ${ selectedMethod === "va" ? "ring-4 ring-white" : ""}`}>
-                    <img src={virtualAcc} alt="Virtual Account" className="w-[45px] h-[45px] object-contain brightness-0 invert"/>
-                    <div className="text-left">
-                        <h3 className="text-white text-[20px] font-semibold">Virtual Account</h3>
-                        <p className="text-white text-[14px]">Via ATM atau M-Banking</p>
-                    </div>
-                </button>
-                <button onClick={() => setSelectedMethod("market")} className={`bg-[#66ac88] rounded-[10px] px-6 py-4 flex items-center gap-5 ${ selectedMethod === "market" ? "ring-4 ring-white" : ""}`}>
-                    <img src={Minimarket} alt="Minimarket" className="w-[45px] h-[45px] object-contain brightness-0 invert"/>
-                    <div className="text-left">
-                        <h3 className="text-white text-[20px] font-semibold">Minimarket</h3>
-                        <p className="text-white text-[14px]">Indomaret, Alfamart</p>
-                    </div>
-                </button>
-                <button onClick={() => setSelectedMethod("card")} className={`bg-[#efb23b] rounded-[10px] px-6 py-4 flex items-center gap-5 ${ selectedMethod === "card" ? "ring-4 ring-white" : ""}`}>
-                    <img src={debitKredit} alt="Kartu" className="w-[45px] h-[45px] object-contain brightness-0 invert"/>
-                    <div className="text-left">
-                        <h3 className="text-white text-[20px] font-semibold"> Kartu Debit/Kredit</h3>
-                        <p className="text-white text-[14px]">Visa</p>
-                    </div>
-                </button>
-            </div>
-            <div className="bg-[#367789] rounded-[10px] mt-8 px-6 py-5 text-white">
-                <div className="flex justify-between text-[18px]">
-                    <span>Nominal Top Up</span>
-                    <span>Rp {nominal.toLocaleString("id-ID")}</span>
+        <div className="p-6">
+            <h2 className="text-2xl mb-4">Metode Pembayaran</h2>
+            <div className="bg-[#5C8FB6] rounded-xl overflow-hidden mb-3 shadow">
+                <div className="flex items-center gap-4 p-4 bg-[#3FA0D7] text-white text-lg font-semibold">
+                    <img src={virtualAcc} className="w-8 filter brightness-0 invert"/>Virtual Account
                 </div>
-                <div className="flex justify-between text-[18px]">
-                    <span>Biaya Admin</span>
-                    <span>Rp {adminFee.toLocaleString("id-ID")}</span>
-                </div>
-                <div className="flex justify-between mt-4 font-bold text-[26px]">
-                    <span>Total Bayar</span>
-                    <span>Rp {totalBayar.toLocaleString("id-ID")}</span>
+                <div className="bg-[#2b85b6] text-white">
+                    {[
+                        { name: "BRI", logo: briLogo},
+                        { name: "BNI", logo: bniLogo},
+                        { name: "BCA", logo: bcaLogo},
+                        { name: "Mandiri", logo: mandiriLogo},
+                    ].map((item, index) => (
+                    <div key={index} className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-white p-1 rounded-md">
+                                <img src={item.logo} className="w-6 h-6 object-contain" />
+                            </div>
+                            <span>{item.name}</span>
+                        </div>
+                        <span onClick={() => navigate("/isisaldobank")} className="text-xl mr-14 cursor-pointer">＞</span>
+                    </div>
+                    ))}
                 </div>
             </div>
-            <div className="flex justify-end mt-8">
-                <button className="bg-[#367789] text-white text-[22px] px-10 py-3 rounded-[8px]">Bayar →</button>
+            <div className="bg-[#46A784] rounded-xl overflow-hidden mb-3 shadow">
+                <div className="flex items-center gap-4 p-4 text-white text-lg font-semibold">
+                    <img src={Minimarket} className="w-8 filter brightness-0 invert"/>Minimarket
+                </div>
+                <div className="bg-[#358E6E] text-white">
+                    {[
+                        {name: "Indomaret", logo: indomaretLogo },
+                        {name: "Alfamaret", logo: alfamartLogo },
+                        {name: "Toko Terdekat", logo: tokoLogo },
+                    ].map((item, index) => (
+                    <div key={index} className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                        <div className="flex items-center gap-3">
+                            <div className="bg-white p-1 rounded-md">
+                                <img src={item.logo} className="w-6 h-6 object-contain" />
+                            </div>
+                            <span>{item.name}</span>
+                        </div>
+                        <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
+                    </div>
+                    ))}
+                </div>
+            </div>
+            <div className="bg-[#FFAD00] rounded-xl p-4 flex items-center justify-between text-white shadow">
+                <div className="flex items-center gap-4 text-lg font-semibold">
+                    <img src={debitKredit} className="w-8 filter brightness-0 invert"/>Kartu Debit/Kredit
+                </div>
+                <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
         </div>
     </div>
-  );
+);
 }
+
+export default IsiSaldo;

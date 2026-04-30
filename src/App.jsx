@@ -4,6 +4,8 @@ import Beranda from "./jsx/beranda.jsx";
 import Profil from "./jsx/profile.jsx";
 import IsiSaldo from "./jsx/isisaldo.jsx";
 import GrafikPengeluaran from "./jsx/grafikPengeluaran.jsx";
+import IsiSaldoMinimarket from "./jsx/isisaldominimarket.jsx";
+import IsiSaldoBank from "./jsx/isisaldobank.jsx";
 
 function App() {
   
@@ -15,6 +17,8 @@ function App() {
         <Route path="/profile" element={<Profil />} />
         <Route path="/isisaldo" element={<IsiSaldo />} />
         <Route path="/grafikpengeluaran" element={<GrafikPengeluaran/>} />
+        <Route path="/isisaldominimarket" element={<IsiSaldoMinimarket/>} />
+        <Route path="/isisaldobank" element={<IsiSaldoBank/>} />
       </Routes>
     </BrowserRouter>
   );
