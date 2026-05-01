@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const PaymentMethodItem = ({ title, subtitle }) => {
+const PaymentMethodItem = ({ title, subtitle, onClick }) => {
   return (
-    <div className="flex items-center justify-between p-3 border rounded-xl hover:bg-gray-50 cursor-pointer transition">
+    <div
+      onClick={onClick}
+      className="flex items-center justify-between p-3 border rounded-xl hover:bg-gray-50 cursor-pointer transition"
+    >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
           💳
@@ -18,20 +21,23 @@ const PaymentMethodItem = ({ title, subtitle }) => {
   );
 };
 
-export default function Payment() {
+export default function Pembayaran() {
   const navigate = useNavigate();
   const [showMoreLeft, setShowMoreLeft] = useState(false);
   const [showMoreRight, setShowMoreRight] = useState(false);
+
+  const handleClick = (metode) => {
+    navigate("/detail-pembayaran", {
+      state: { metode, nominal: 200000 },
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100">
 
       {/* HEADER */}
       <div className="bg-[#1F6F78] text-white px-4 py-4 flex items-center gap-3">
-        <span
-          onClick={() => navigate(-1)}
-          className="text-2xl cursor-pointer"
-        >
+        <span onClick={() => navigate(-1)} className="text-2xl cursor-pointer">
           ←
         </span>
         <h1 className="font-semibold">Pintu Pembayaran</h1>
@@ -59,16 +65,11 @@ export default function Payment() {
 
             <div className="p-3 space-y-3">
 
-              {/* 🔥 QRIS (bisa klik) */}
-              <div
-                onClick={() =>
-                  navigate("/detail-pembayaran", {
-                    state: { metode: "QRIS", nominal: 200000 },
-                  })
-                }
-              >
-                <PaymentMethodItem title="QRIS" subtitle="Scan QR" />
-              </div>
+              <PaymentMethodItem
+                title="QRIS"
+                subtitle="Scan QR"
+                onClick={() => handleClick("QRIS")}
+              />
 
               <PaymentMethodItem title="GOPAY" subtitle="Aplikasi Gopay" />
               <PaymentMethodItem title="DANA" subtitle="Saldo Dana" />
@@ -98,7 +99,13 @@ export default function Payment() {
             </div>
 
             <div className="p-3 space-y-3">
-              <PaymentMethodItem title="ATM Transfer" subtitle="Transfer Bank" />
+
+              <PaymentMethodItem
+                title="ATM Transfer"
+                subtitle="Transfer Bank"
+                onClick={() => handleClick("ATM Transfer")}
+              />
+
               <PaymentMethodItem title="Minimarket" subtitle="Bayar di kasir" />
               <PaymentMethodItem title="Kartu Debit/Kredit" subtitle="Visa / Mastercard" />
 

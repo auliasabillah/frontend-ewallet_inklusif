@@ -77,21 +77,51 @@ export default function DetailPembayaran() {
           </div>
         </div>
 
-        {/* RIGHT */}
-        <div className="bg-white rounded-xl shadow p-4 text-center space-y-3">
+        {/* RIGHT (DINAMIS ) */}
+        <div className="bg-white rounded-xl shadow p-4 text-center space-y-4">
 
+          {/* TITLE */}
           <p className="bg-[#1F6F78] text-white py-2 rounded text-sm">
-            Scan QRIS untuk Pembayaran
+            {metode === "QRIS"
+              ? "Scan QRIS untuk Pembayaran"
+              : "Transfer ke Rekening Berikut"}
           </p>
 
-          <div className="w-40 h-40 bg-gray-300 mx-auto flex items-center justify-center">
-            QR
-          </div>
+          {/* QRIS */}
+          {metode === "QRIS" ? (
+            <div className="w-40 h-40 bg-gray-300 mx-auto flex items-center justify-center rounded">
+              QR
+            </div>
+          ) : (
+            /* ATM TRANSFER */
+            <div className="text-left space-y-3 text-sm">
 
+              <div>
+                <p className="text-gray-500">Bank</p>
+                <p className="font-semibold">BCA - Bank Central Asia</p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">Nomor Rekening</p>
+                <p className="font-semibold">1234 5678 9012</p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">Nama Penerima</p>
+                <p className="font-semibold">Zefanya Angelica</p>
+              </div>
+
+              <div className="bg-blue-50 text-blue-700 p-2 rounded text-xs">
+                Pastikan transfer sesuai nominal
+              </div>
+            </div>
+          )}
+
+          {/* ID */}
           <p className="text-xs text-gray-500">ID Transaksi</p>
           <p className="font-semibold text-[#1F6F78]">TRX001</p>
 
-          
+          {/* BUTTON */}
           <button
             onClick={handleBayar}
             className="w-full bg-[#1F6F78] text-white py-2 rounded"
