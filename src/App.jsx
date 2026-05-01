@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./pages/login.js";
+import Login from "./pages/login.jsx";
 import Beranda from "./pages/beranda.jsx";
-import Profil from "./pages/profile.js";
-import IsiSaldo from "./pages/isisaldo.js";
-import GrafikPengeluaran from "./pages/grafikPengeluaran.js";
+import Profil from "./pages/profile.jsx";
+import IsiSaldo from "./pages/isisaldo.jsx";
+import GrafikPengeluaran from "./pages/grafikPengeluaran.jsx";
 import IsiSaldoMinimarket from "./pages/isisaldominimarket.jsx";
-import IsiSaldoBank from "./pages/isisaldobank.js";
-
+import IsiSaldoBank from "./pages/isisaldobank.jsx";
+import Pembayaran from "./pages/pembayaran.jsx";
+import DetailPembayaran from "./pages/detailpembayaran.jsx";
+import KonfirmasiPembayaran from "./pages/konfirmasipembayaran.jsx";
 function App() {
   
   return (
@@ -19,6 +21,9 @@ function App() {
         <Route path="/grafikpengeluaran" element={<GrafikPengeluaran/>} />
         <Route path="/isisaldominimarket" element={<IsiSaldoMinimarket/>} />
         <Route path="/isisaldobank" element={<IsiSaldoBank/>} />
+        <Route path="/pembayaran" element={<Pembayaran />} />
+        <Route path="/detail-pembayaran" element={<DetailPembayaran />} />
+        <Route path="/konfirmasipembayaran" element={<KonfirmasiPembayaran/>} />
       </Routes>
     </BrowserRouter>
   );
