@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./jsx/login.jsx";
-import Beranda from "./jsx/beranda.jsx";
-import Profil from "./jsx/profile.jsx";
-import IsiSaldo from "./jsx/isisaldo.jsx";
-import GrafikPengeluaran from "./jsx/grafikPengeluaran.jsx";
-import IsiSaldoMinimarket from "./jsx/isisaldominimarket.jsx";
-import IsiSaldoBank from "./jsx/isisaldobank.jsx";
+import Login from "./pages/login.js";
+import Beranda from "./pages/beranda.jsx";
+import Profil from "./pages/profile.js";
+import IsiSaldo from "./pages/isisaldo.js";
+import GrafikPengeluaran from "./pages/grafikPengeluaran.js";
+import IsiSaldoMinimarket from "./pages/isisaldominimarket.jsx";
+import IsiSaldoBank from "./pages/isisaldobank.js";
 
 function App() {
   
