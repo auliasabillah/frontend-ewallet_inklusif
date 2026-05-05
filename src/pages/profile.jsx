@@ -17,7 +17,6 @@ function Profile() {
                 <button onClick={() => navigate("/beranda")} className="text-white text-[30px] font-light">⬅︎</button>
                 <h1 className="text-white text-[24px] font-semibold">Profil</h1>
             </div>
-            <img src={helpIcon} alt="Help" className="w-[38px] h-[38px] object-contain brightness-0 invert"/>
         </div>
         <div className="flex flex-col items-center px-8 py-6">
             <img src={avatarProfile} alt="Profile" className="w-[190px] h-[190px] object-contain"/>
@@ -44,7 +43,7 @@ function Profile() {
                         <img src={loginIcon} alt="Logout" className="w-[34px] h-[34px] object-contain brightness-0 invert"/> 
                         <p className="text-white text-[18px]">Keluar / ganti akun</p>
                     </div>
-                    <span className="text-white text-[28px]">›</span>
+                    <span onClick={() => navigate("/")} className="text-white text-[32px]">＞</span>
                 </div>
             </div>
         </div>

@@ -46,7 +46,7 @@ function IsiSaldoMinimarket() {
                 </div>
             </div>
             <div className="flex justify-end">
-                <button className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
+                <button onClick={() => navigate("/detailpembayaranisisaldo")} className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
             </div>
         </div>
     </div>

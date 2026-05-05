@@ -13,6 +13,7 @@ import tokoLogo from "../assets/isisaldo/tokoTerdekat.png";
 
 function IsiSaldo() {
     const navigate = useNavigate();
+    
     return (
     <div className="min-h-screen bg-white">
         <div className="bg-[#126B7D] text-white p-4 flex items-center gap-3">
@@ -23,58 +24,87 @@ function IsiSaldo() {
             <h2 className="text-2xl mb-4">Metode Pembayaran</h2>
             <div className="bg-[#5C8FB6] rounded-xl overflow-hidden mb-3 shadow">
                 <div className="flex items-center gap-4 p-4 bg-[#3FA0D7] text-white text-lg font-semibold">
-                    <img src={virtualAcc} className="w-8 filter brightness-0 invert"/>Virtual Account
-                </div>
-                <div className="bg-[#2b85b6] text-white">
-                    {[
-                        { name: "BRI", logo: briLogo},
-                        { name: "BNI", logo: bniLogo},
-                        { name: "BCA", logo: bcaLogo},
-                        { name: "Mandiri", logo: mandiriLogo},
-                    ].map((item, index) => (
-                    <div key={index} className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                    <img src={virtualAcc} className="w-8 filter brightness-0 invert" />Virtual Account</div>
+                    <div className="bg-[#2b85b6] text-white">
+                        <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
                         <div className="flex items-center gap-3">
                             <div className="bg-white p-1 rounded-md">
-                                <img src={item.logo} className="w-6 h-6 object-contain" />
+                                <img src={briLogo} className="w-6 h-6 object-contain" />
                             </div>
-                            <span>{item.name}</span>
+                            <span>BRI</span>
                         </div>
                         <span onClick={() => navigate("/isisaldobank")} className="text-xl mr-14 cursor-pointer">＞</span>
                     </div>
-                    ))}
-                </div>
-            </div>
-            <div className="bg-[#46A784] rounded-xl overflow-hidden mb-3 shadow">
-                <div className="flex items-center gap-4 p-4 text-white text-lg font-semibold">
-                    <img src={Minimarket} className="w-8 filter brightness-0 invert"/>Minimarket
-                </div>
-                <div className="bg-[#358E6E] text-white">
-                    {[
-                        {name: "Indomaret", logo: indomaretLogo },
-                        {name: "Alfamaret", logo: alfamartLogo },
-                        {name: "Toko Terdekat", logo: tokoLogo },
-                    ].map((item, index) => (
-                    <div key={index} className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
-                        <div className="flex items-center gap-3">
-                            <div className="bg-white p-1 rounded-md">
-                                <img src={item.logo} className="w-6 h-6 object-contain" />
-                            </div>
-                            <span>{item.name}</span>
+                    <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white p-1 rounded-md">
+                            <img src={bniLogo} className="w-6 h-6 object-contain" />
                         </div>
-                        <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
+                        <span>BNI</span>
                     </div>
-                    ))}
+                    <span className="text-xl mr-14 cursor-pointer">＞</span>
+                </div> 
+                <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white p-1 rounded-md">
+                        <img src={bcaLogo} className="w-6 h-6 object-contain" />
+                    </div>
+                    <span>BCA</span>
                 </div>
+                <span className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
-            <div className="bg-[#FFAD00] rounded-xl p-4 flex items-center justify-between text-white shadow">
-                <div className="flex items-center gap-4 text-lg font-semibold">
-                    <img src={debitKredit} className="w-8 filter brightness-0 invert"/>Kartu Debit/Kredit
+            <div className="flex items-center justify-between pl-14 px-4 py-3">
+                <div className="flex items-center gap-3">
+                    <div className="bg-white p-1 rounded-md">
+                        <img src={mandiriLogo} className="w-6 h-6 object-contain" />
+                    </div>
+                    <span>Mandiri</span>
                 </div>
-                <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
+                <span className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
         </div>
     </div>
-);
+    <div className="bg-[#46A784] rounded-xl overflow-hidden mb-3 shadow">
+        <div className="flex items-center gap-4 p-4 text-white text-lg font-semibold">
+            <img src={Minimarket} className="w-8 filter brightness-0 invert" />Minimarket</div>
+            <div className="bg-[#358E6E] text-white">
+                <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white p-1 rounded-md">
+                            <img src={indomaretLogo} className="w-6 h-6 object-contain" />
+                        </div>
+                        <span>Indomaret</span>
+                    </div>
+                    <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
+                </div>
+                <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white p-1 rounded-md">
+                            <img src={alfamartLogo} className="w-6 h-6 object-contain" />
+                        </div>
+                        <span>Alfamart</span>
+                    </div>
+                <span className="text-xl mr-14 cursor-pointer">＞</span>
+            </div>
+            <div className="flex items-center justify-between pl-14 px-4 py-3">
+                <div className="flex items-center gap-3">
+                    <div className="bg-white p-1 rounded-md">
+                        <img src={tokoLogo} className="w-6 h-6 object-contain" />
+                    </div>
+                    <span>Toko Terdekat</span>
+                </div>
+                <span className="text-xl mr-14 cursor-pointer">＞</span>
+            </div>
+        </div>
+    </div>
+    <div className="bg-[#FFAD00] rounded-xl p-4 flex items-center justify-between text-white shadow">
+        <div className="flex items-center gap-4 text-lg font-semibold">
+            <img src={debitKredit} className="w-8 filter brightness-0 invert" />Kartu Debit/Kredit</div>
+            <span className="text-xl mr-14 cursor-pointer">＞</span>
+        </div>
+    </div>
+    </div>
+  );
 }
 
 export default IsiSaldo;

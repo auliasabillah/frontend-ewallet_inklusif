@@ -11,6 +11,7 @@ import Profil from "./pages/profile.jsx";
 import IsiSaldo from "./pages/isisaldo.jsx";
 import IsiSaldoMinimarket from "./pages/isisaldominimarket.jsx";
 import IsiSaldoBank from "./pages/isisaldobank.jsx";
+import DetailPembayaran from "./pages/detailpembayaranIsisaldo.jsx";
 
 // FITUR
 import GrafikPengeluaran from "./pages/grafikPengeluaran.jsx";
@@ -43,6 +44,7 @@ function App() {
         <Route path="/isisaldo" element={<IsiSaldo />} />
         <Route path="/isisaldominimarket" element={<IsiSaldoMinimarket />} />
         <Route path="/isisaldobank" element={<IsiSaldoBank />} />
+        <Route path="/detailpembayaranisisaldo" element={<DetailPembayaran />} />
 
         {/* FITUR */}
         <Route path="/grafikpengeluaran" element={<GrafikPengeluaran />} />
