@@ -100,7 +100,7 @@ function IsiSaldo() {
     <div className="bg-[#FFAD00] rounded-xl p-4 flex items-center justify-between text-white shadow">
         <div className="flex items-center gap-4 text-lg font-semibold">
             <img src={debitKredit} className="w-8 filter brightness-0 invert" />Kartu Debit/Kredit</div>
-            <span className="text-xl mr-14 cursor-pointer">＞</span>
+            <span onClick={() => navigate("/isisaldokartu")} className="text-xl mr-14 cursor-pointer">＞</span>
         </div>
     </div>
     </div>
