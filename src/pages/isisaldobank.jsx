@@ -40,7 +40,7 @@ function Bank() {
                     <li>4. Masukkan nomor Virtual Account yang tersedia.</li>
                     <li>5. Periksa detail transaksi dan nominal pembayaran.</li>
                     <li>6. Konfirmasi transaksi.</li>
-                    <li>6. Simpan struk sebagai bukti pembayaran.</li>
+                    <li>7. Simpan struk sebagai bukti pembayaran.</li>
                 </ol>
             </div>
         </div>
