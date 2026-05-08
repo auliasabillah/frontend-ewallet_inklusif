@@ -21,7 +21,6 @@ export default function KonfirmasiTransfer() {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      {/* HEADER */}
       <div className="bg-[#1F6F78] text-white p-4 flex items-center gap-3">
         <span onClick={() => navigate(-1)} className="cursor-pointer text-xl">←</span>
         <h1 className="font-semibold">Konfirmasi Pembayaran</h1>
@@ -29,7 +28,6 @@ export default function KonfirmasiTransfer() {
 
       <div className="max-w-3xl mx-auto p-6 space-y-5">
 
-        {/* DETAIL */}
         <div className="bg-white p-5 rounded-xl shadow">
           <p className="font-semibold mb-3">Detail Transfer</p>
 
@@ -94,7 +92,7 @@ export default function KonfirmasiTransfer() {
           </div>
 
           <button
-            onClick={handleTransfer} // 🔥 FIX DI SINI
+            onClick={handleTransfer} 
             className="w-full bg-[#1F6F78] text-white py-3 rounded-xl"
           >
             Konfirmasi & Transfer

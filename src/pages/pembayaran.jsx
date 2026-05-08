@@ -34,8 +34,6 @@ export default function Pembayaran() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-
-      {/* HEADER */}
       <div className="bg-[#1F6F78] text-white px-4 py-4 flex items-center gap-3">
         <span onClick={() => navigate(-1)} className="text-2xl cursor-pointer">
           ←
@@ -44,8 +42,6 @@ export default function Pembayaran() {
       </div>
 
       <div className="p-6 max-w-5xl mx-auto">
-
-        {/* NOMINAL */}
         <div className="bg-white p-4 rounded-xl mb-4 flex justify-between shadow">
           <span>Nominal Top Up</span>
           <span className="text-[#1F6F78] font-semibold">Rp 200.000</span>

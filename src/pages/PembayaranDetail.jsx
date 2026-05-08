@@ -22,7 +22,6 @@ export default function PembayaranDetail() {
   return (
     <div className="min-h-screen bg-gray-100">
 
-      {/* HEADER */}
       <div className="bg-[#1F6F78] text-white p-4 flex items-center gap-3">
         <span onClick={() => navigate(-1)} className="cursor-pointer text-xl">
           ←
@@ -109,7 +108,6 @@ export default function PembayaranDetail() {
               <span className="font-bold">23:59:48</span>
             </div>
 
-            {/* 🔥 BUTTON FIX */}
             <div className="flex gap-4">
               <button
                 onClick={() => navigate(-1)}

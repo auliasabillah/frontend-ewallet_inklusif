@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import logoLogin from "../assets/login/login.png";
 import logoEwallet from "../assets/login/ewallet.png";
 import logoGoogle from "../assets/login/google.png";
@@ -57,6 +57,16 @@ export default function Login() {
             <button className="w-full border border-gray-200 rounded-xl py-3 flex items-center justify-center gap-3 text-[14px] font-medium">
                 <img src={logoGoogle} alt="google" className="w-5 h-5"/> Sign in with Google
             </button>
+            <p className="text-center text-[14px] text-gray-500 mt-6">
+                Belum punya akun?{" "}
+
+            <Link
+             to="/register"
+             className="text-blue-700 font-semibold"
+            >
+              Register
+            </Link>
+            </p>
             </div>
         </div>
     </div>
