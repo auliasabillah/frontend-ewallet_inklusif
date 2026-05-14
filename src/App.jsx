@@ -11,7 +11,7 @@ import IsiSaldoKartu from "./pages/isisaldokartu.jsx"
 import DetailPembayaranKartu from "./pages/detailpembayarankartu.jsx";
 import KonfirmasiKartuDebit from "./pages/konfirmasikartudebit.jsx";
 import GrafikPengeluaran from "./pages/grafikPengeluaran.jsx";
-import Transfer from "./pages/transfer.jsx";
+import Transfer from "./pages/Transfer.jsx";
 import KonfirmasiTransfer from "./pages/KonfirmasiTransfer.jsx";
 import Pembayaran from "./pages/pembayaran.jsx";
 import PembayaranDetail from "./pages/PembayaranDetail.jsx";
