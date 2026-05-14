@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
 import logoEwallet from "../assets/login/ewallet.png";
 
 export default function Register() {
@@ -11,27 +11,29 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
-
-    const handleRegister = () => {
-
-    
-        if (!nama || !email || !password || !confirmPassword) {
-            alert("Semua data harus diisi!");
-            return;
-        }
-
-      
-        if (password !== confirmPassword) {
-            alert("Password tidak sama!");
-            return;
-        }
-
-       
+    const [nomorhp, setNomorhp] = useState("");
+    const handleRegister = async () => {
+    if (!nama || !email || !nomorhp || !password || !confirmPassword) {
+        alert("Semua data harus diisi!");
+        return;
+    }
+    if (password !== confirmPassword) {
+        alert("Password tidak sama!");
+        return;
+    }
+    try {
+        const response = await axios.post("http://localhost:8000/api/register", {
+            name: nama,
+            email: email,
+            password: password,
+            notelp: nomorhp,
+        });
         alert("Register berhasil!");
-
         navigate("/");
-    };
+    } catch (error) {
+        alert(error.response?.data?.message || "Register gagal");
+    }
+};
 
     return (
         <div className="w-full min-h-screen flex bg-gradient-to-br from-teal-500 to-teal-800">
@@ -99,6 +101,19 @@ export default function Register() {
                                 placeholder="Masukkan email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-gray-100 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-teal-500"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-[14px] font-semibold mb-2">
+                                Nomor HP
+                            </label>
+
+                            <input
+                                type="nomorhp"
+                                placeholder="Masukkan nomor telepon"
+                                value={nomorhp}
+                                onChange={(e) => setNomorhp(e.target.value)}
                                 className="w-full bg-gray-100 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-teal-500"
                             />
                         </div>

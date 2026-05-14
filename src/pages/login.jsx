@@ -3,11 +3,24 @@ import { useNavigate, Link } from "react-router-dom";
 import logoLogin from "../assets/login/login.png";
 import logoEwallet from "../assets/login/ewallet.png";
 import logoGoogle from "../assets/login/google.png";
+import axios from "axios";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const handleLogin = async () => {
+    try {
+        const response = await axios.post("http://localhost:8000/api/login", {
+            email: email,
+            password: password,
+        });
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        navigate("/beranda");
+    } catch (error) {
+        alert(error.response?.data?.message || "Login gagal");
+    }
+};
     
     return (
     <div className="w-full min-h-screen flex bg-white">
@@ -46,7 +59,7 @@ export default function Login() {
                 <a href="#" className="text-[13px] text-gray-400"> Forgot Password?</a>
             </div>
 
-            <button onClick={() => navigate("/beranda")} className="w-full bg-blue-700 text-white rounded-xl py-3" > Login </button>
+            <button onClick={handleLogin} className="w-full bg-blue-700 text-white rounded-xl py-3" > Login </button>
             
             <div className="flex items-center mb-6">
                 <div className="flex-1 border-t border-gray-200"></div>

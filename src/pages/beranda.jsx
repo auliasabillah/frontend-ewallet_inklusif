@@ -8,13 +8,13 @@ import Bawah from "../assets/dashboard/bawah.png";
 
 function Beranda() {
   const navigate = useNavigate();
-
   const transactions = [
     { name: "Seniaku", date: "1 April, 17.20", amount: "Rp 40.000", icon: Bawah, type: "out" },
     { name: "Leyi", date: "11 Maret, 15.00", amount: "Rp 50.000", icon: Atas, type: "in" },
     { name: "Indomaret", date: "11 Maret, 14.20", amount: "Rp 100.000", icon: Bawah, type: "out" },
     { name: "Meyy", date: "8 Maret, 09.00", amount: "Rp 15.000", icon: Atas, type: "in" },
   ];
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -26,7 +26,7 @@ function Beranda() {
         <img
           src={profileIcon}
           alt="Profile"
-          className="w-[48px] h-[48px] cursor-pointer brightness-0 invert"
+          className="w-[48px] h-[48px] cursor-pointer invert"
           onClick={() => navigate("/profile")}
         />
       </div>
@@ -37,7 +37,7 @@ function Beranda() {
         {/* SALDO */}
         <div className="mb-6">
           <h2 className="text-[28px] font-semibold text-black">
-            Selamat Datang, Nana
+            Selamat Datang, {user?.name}
           </h2>
 
           <p className="text-[16px] mt-2 text-black">Total Saldo</p>

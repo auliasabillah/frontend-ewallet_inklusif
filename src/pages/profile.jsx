@@ -22,6 +22,7 @@ function Profile() {
         reader.readAsDataURL(file);
     }
   };
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <div className="w-full h-screen bg-white overflow-hidden">
@@ -33,7 +34,7 @@ function Profile() {
         </div>
         <div className="flex flex-col items-center px-8 py-6">
             <img src={tempImage || profileImage} alt="Profile" className="w-[190px] h-[190px] object-contain"/>
-            <h2 className="text-[28px] font-semibold text-black mt-2">Nana</h2>
+            <h2 className="text-[28px] font-semibold text-black mt-2">{user?.name}</h2>
             <button onClick={() => fileInputRef.current.click()} className="mt-2 bg-[#d6d6d6] px-4 py-2 rounded-[7px] flex items-center gap-2 shadow-sm">
                 <img src={editIcon} alt="Edit" className="w-[13px] h-[15px] object-contain"/>
                 <span className="text-[11px] font-medium text-black"> Edit Foto Profile </span>
@@ -50,7 +51,7 @@ function Profile() {
             <div className="w-full max-w-[900px] mt-8 flex flex-col gap-4">
                 <div className="bg-[#126B7D] rounded-[18px] px-6 py-4 flex items-center gap-5">
                     <img src={avatarIcon} alt="Avatar" className="w-[34px] h-[34px] object-contain brightness-0 invert"/>
-                    <p className="text-white text-[18px]">Nana Liana</p>
+                    <p className="text-white text-[18px]">{user?.name}</p>
                 </div>
                 <div className="bg-[#126B7D] rounded-[18px] px-6 py-4 flex items-center gap-5">
                     <img src={telpIcon} alt="Phone" className="w-[34px] h-[34px] object-contain brightness-0 invert"/>
@@ -58,7 +59,7 @@ function Profile() {
                 </div>
                 <div className="bg-[#126B7D] rounded-[18px] px-6 py-4 flex items-center gap-5">
                     <img src={emailIcon} alt="Email" className="w-[34px] h-[34px] object-contain brightness-0 invert"/>
-                    <p className="text-white text-[18px]"> lianaa739@gmail.com</p>
+                    <p className="text-white text-[18px]">{user?.email}</p>
                 </div>
                 <div className="bg-[#126B7D] rounded-[18px] px-6 py-4 flex items-center justify-between cursor-pointer">
                     <div className="flex items-center gap-5">
