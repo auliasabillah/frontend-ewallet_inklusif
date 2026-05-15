@@ -40,7 +40,7 @@ function DebitKredit() {
                     </div>
                 </div>
                 <div className="flex justify-center mt-8">
-                    <button onClick={() => navigate("/detailpembayarankartu")} className="w-[280px] h-14 bg-[#126B7D] text-white text-xl rounded-xl">Lanjutkan</button>
+                    <button onClick={() => navigate("/detailpembayarankartu", {state: {bank: bank, nomorKartu: nomorKartu, nominal:nominal}})} className="w-[280px] h-14 bg-[#126B7D] text-white text-xl rounded-xl">Lanjutkan</button>
                 </div>
             </div>
         </div>

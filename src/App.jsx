@@ -40,7 +40,6 @@ function App() {
         <Route path="/detail-pembayaran" element={<PembayaranDetail />} />
         <Route path="/konfirmasipembayaran" element={<SuksesPembayaran />} />
         <Route path="/riwayat" element={<RiwayatTransaksi />} />
-
       </Routes>
     </BrowserRouter>
   );

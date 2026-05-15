@@ -110,7 +110,7 @@ export default function Register() {
                             </label>
 
                             <input
-                                type="nomorhp"
+                                type="text"
                                 placeholder="Masukkan nomor telepon"
                                 value={nomorhp}
                                 onChange={(e) => setNomorhp(e.target.value)}

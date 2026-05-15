@@ -1,8 +1,20 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import briLogo from "../assets/isisaldo/BRI.png";
+import bniLogo from "../assets/isisaldo/BNI.png";
+import bcaLogo from "../assets/isisaldo/BCA.png";
+import mandiriLogo from "../assets/isisaldo/Mandiri.png";
 
 function Bank() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const bank= location.state?.bank;
+    const bankData = {
+        bri: { nama: "BRI", logo: briLogo, noVA: "88650 0894 9672 983"},
+        bni: { nama: "BNI", logo: bniLogo, noVA: "9876 0894 9672 983"},
+        bca: { nama: "BCA", logo: bcaLogo, noVA: "52496 0894 9672 983"},
+        mandiri: { nama: "Mandiri", logo: mandiriLogo, noVA: "3848 0894 9672 983"},
+    };
+    const data = bankData[bank];
     
     return (
     <div className="min-h-screen bg-white">
@@ -13,12 +25,12 @@ function Bank() {
         <div className="p-6">
             <h2 className="text-xl mb-3">Metode Pembayaran</h2>
             <div className="flex items-center gap-3 mb-6">
-                <img src={briLogo} className="w-10 h-10 object-contain" />
-                <span className="text-lg">BRI</span>
+                <img src={data?.logo} className="w-10 h-10 object-contain" />
+                <span className="text-lg">{data?.nama}</span>
             </div>
             <h2 className="text-xl mb-3">Nomor Virtual Account</h2>
             <div className="bg-[#b1e2ff] text-center py-6 rounded">
-                <span className="text-2xl tracking-widest">88650 0894 9672 983</span>
+                <span className="text-2xl tracking-widest">{data?.noVA}</span>
             </div>
             <div className="bg-[#f0f0f0] mt-8 p-5 rounded">
                 <p className="text-[#5b5b5b] mb-3">MBANKING</p>

@@ -5,6 +5,8 @@ import transferIcon from "../assets/dashboard/send.png";
 import paymentIcon from "../assets/dashboard/card.png";
 import Atas from "../assets/dashboard/atas.png";
 import Bawah from "../assets/dashboard/bawah.png";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Beranda() {
   const navigate = useNavigate();
@@ -14,7 +16,14 @@ function Beranda() {
     { name: "Indomaret", date: "11 Maret, 14.20", amount: "Rp 100.000", icon: Bawah, type: "out" },
     { name: "Meyy", date: "8 Maret, 09.00", amount: "Rp 15.000", icon: Atas, type: "in" },
   ];
+  const [saldo, setSaldo] = useState(0);
   const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/saldo/${user?.id}`)
+        .then(res => {console.log("saldo:", res.data); setSaldo(res.data.saldo);})
+        .catch(err => console.log(err));
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -43,7 +52,7 @@ function Beranda() {
           <p className="text-[16px] mt-2 text-black">Total Saldo</p>
 
           <h3 className="text-[42px] font-bold text-[#79c7a3]">
-            Rp 2.000.000
+            Rp {saldo.toLocaleString('id-ID')}
           </h3>
         </div>
 

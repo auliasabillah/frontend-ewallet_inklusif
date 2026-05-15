@@ -33,7 +33,7 @@ function IsiSaldo() {
                             </div>
                             <span>BRI</span>
                         </div>
-                        <span onClick={() => navigate("/isisaldobank")} className="text-xl mr-14 cursor-pointer">＞</span>
+                        <span onClick={() => navigate("/isisaldobank", {state: {bank:"bri"}})} className="text-xl mr-14 cursor-pointer">＞</span>
                     </div>
                     <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
                     <div className="flex items-center gap-3">
@@ -42,7 +42,7 @@ function IsiSaldo() {
                         </div>
                         <span>BNI</span>
                     </div>
-                    <span className="text-xl mr-14 cursor-pointer">＞</span>
+                    <span onClick={() => navigate("/isisaldobank", {state: {bank:"bni"}})} className="text-xl mr-14 cursor-pointer">＞</span>
                 </div> 
                 <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
                     <div className="flex items-center gap-3">
@@ -51,7 +51,7 @@ function IsiSaldo() {
                     </div>
                     <span>BCA</span>
                 </div>
-                <span className="text-xl mr-14 cursor-pointer">＞</span>
+                <span onClick={() => navigate("/isisaldobank", {state: {bank:"bca"}})} className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
             <div className="flex items-center justify-between pl-14 px-4 py-3">
                 <div className="flex items-center gap-3">
@@ -60,7 +60,7 @@ function IsiSaldo() {
                     </div>
                     <span>Mandiri</span>
                 </div>
-                <span className="text-xl mr-14 cursor-pointer">＞</span>
+                <span onClick={() => navigate("/isisaldobank", {state: {bank:"mandiri"}})} className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@ function IsiSaldo() {
                         </div>
                         <span>Indomaret</span>
                     </div>
-                    <span onClick={() => navigate("/isisaldominimarket")} className="text-xl mr-14 cursor-pointer">＞</span>
+                    <span onClick={() => navigate("/isisaldominimarket", {state: {minimarket:"indomaret"}})} className="text-xl mr-14 cursor-pointer">＞</span>
                 </div>
                 <div className="flex items-center justify-between pl-14 px-4 py-3 border-b border-white/30">
                     <div className="flex items-center gap-3">
@@ -84,7 +84,7 @@ function IsiSaldo() {
                         </div>
                         <span>Alfamart</span>
                     </div>
-                <span className="text-xl mr-14 cursor-pointer">＞</span>
+                <span onClick={() => navigate("/isisaldominimarket", {state: {minimarket:"alfamart"}})} className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
             <div className="flex items-center justify-between pl-14 px-4 py-3">
                 <div className="flex items-center gap-3">
@@ -93,7 +93,7 @@ function IsiSaldo() {
                     </div>
                     <span>Toko Terdekat</span>
                 </div>
-                <span className="text-xl mr-14 cursor-pointer">＞</span>
+                <span onClick={() => navigate("/isisaldominimarket", {state: {minimarket:"tokoterdekat"}})} className="text-xl mr-14 cursor-pointer">＞</span>
             </div>
         </div>
     </div>

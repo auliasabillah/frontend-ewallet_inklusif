@@ -1,7 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 
 function DetailPembayaran() {
     const navigate = useNavigate();
+    const location = useLocation();
+        const minimarket= location.state?.minimarket;
+        const dataMinimarket = {
+            indomaret: { nama: "Inomaret"},
+            alfamart: { nama: "Alfamart"},
+            tokoterdekat: { nama: "Toko Terdekat"},
+        };
+        const data = dataMinimarket[minimarket];
+
     return (
     <div className="min-h-screen bg-white">
         <div className="bg-[#126B7D] text-white px-6 py-4 flex items-center gap-3">
@@ -28,7 +37,7 @@ function DetailPembayaran() {
                 <div className="bg-gray-200 p-5 rounded">
                     <p className="mb-3 text-lg">Cara Pembayaran</p>
                     <ol className="text-gray-700 space-y-1 text-sm">
-                        <li>1. Pergi ke kasir Indomaret terdekat</li>
+                        <li>1. Pergi ke kasir {data?.nama} terdekat</li>
                         <li>2. Tunjukkan kode pembayaran ke kasir</li>
                         <li>3. Bayar sejumlah Rp 100.000</li>
                         <li>4. Saldo akan masuk otomatis dalam 1-5 menit setelah kasir konfirmasi</li>

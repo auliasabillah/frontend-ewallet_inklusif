@@ -1,6 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import { useState } from "react";
 import indomaretLogo from "../assets/isisaldo/Indomaret.png";
+import alfamartLogo from "../assets/isisaldo/Alfamart.png";
+import tokoLogo from "../assets/isisaldo/tokoTerdekat.png";
+
 
 function IsiSaldoMinimarket() {
     const navigate = useNavigate();
@@ -9,6 +12,14 @@ function IsiSaldoMinimarket() {
         if (!angka) return "Rp 0";
         return "Rp " + Number(angka).toLocaleString("id-ID");
     };
+    const location = useLocation();
+    const minimarket= location.state?.minimarket;
+    const dataMinimarket = {
+        indomaret: { nama: "Inomaret", logo: indomaretLogo},
+        alfamart: { nama: "Alfamart", logo: alfamartLogo},
+        tokoterdekat: { nama: "Toko Terdekat", logo: tokoLogo},
+    };
+    const data = dataMinimarket[minimarket];
 
     return (
     <div className="min-h-screen bg-white">
@@ -19,8 +30,8 @@ function IsiSaldoMinimarket() {
         <div className="px-8 py-6">
             <h2 className="text-2xl mb-3">Metode Pembayaran</h2>
             <div className="flex items-center gap-3 mb-6">
-                <img src={indomaretLogo} className="w-12 h-12 object-contain" />
-                <span className="text-xl">Indomaret</span>
+                <img src={data?.logo} className="w-12 h-12 object-contain" />
+                <span className="text-xl">{data?.nama}</span>
             </div>
             <h2 className="text-2xl mb-3">Nominal Top Up</h2>
             <input type="number" value={nominal} onChange={(e) => setNominal(e.target.value)} className="w-full h-[70px] bg-[#126B7D] text-white text-3xl px-6 rounded-lg mb-4 outline-none" placeholder="Rp 0"/>
@@ -46,7 +57,7 @@ function IsiSaldoMinimarket() {
                 </div>
             </div>
             <div className="flex justify-end">
-                <button onClick={() => navigate("/detailpembayaranisisaldo")} className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
+                <button onClick={() => navigate("/detailpembayaranisisaldo", {state: {minimarket: minimarket}})} className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
             </div>
         </div>
     </div>

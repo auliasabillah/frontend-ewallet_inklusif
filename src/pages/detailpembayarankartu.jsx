@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 function DetailPembayaran() {
@@ -10,6 +10,17 @@ function DetailPembayaran() {
         newPin[index] = value;
         setPin(newPin);
     };
+    const location = useLocation();
+    const nomorKartu = location.state?.nomorKartu;
+    const nominal = location.state?.nominal;
+    const bank= location.state?.bank;
+        const bankData = {
+            BRI: { nama: "BRI - Bank Rakyar Indonesia"},
+            BNI: { nama: "BNI - Bank Negara Indonesia"},
+            BCA: { nama: "BCA - Bank Central Asia"},
+            Mandiri: { nama: "Mandiri"},
+        };
+        const data = bankData[bank];
 
     return (
         <div className="w-screen h-screen bg-[#fbfbfb] flex flex-col overflow-hidden">
@@ -29,14 +40,14 @@ function DetailPembayaran() {
                                 <p>Nomor Rekening</p>
                             </div>
                             <div className="space-y-3 text-right">
-                                <p>BCA - Bank Central Asia</p>
-                                <p className="font-bold">1234 5678 9012 3456</p>
+                                <p>{data?.nama}</p>
+                                <p className="font-bold">{nomorKartu}</p>
                             </div>
                         </div>
                         <div className="border-b border-gray-400 my-4"></div>
                         <div className="flex justify-between text-base mb-3">
                             <p>Nominal Pembayaran</p>
-                            <p className="text-[#126B7D] font-bold">Rp 150.000</p>
+                            <p className="text-[#126B7D] font-bold">Rp {Number(nominal).toLocaleString("id-ID")}</p>
                         </div>
                         <div className="flex justify-between text-base">
                             <p>Biaya Admin</p>
@@ -45,7 +56,7 @@ function DetailPembayaran() {
                         <div className="border-b border-gray-400 my-4"></div>
                         <div className="flex justify-between text-base">
                             <p>Total</p>
-                            <p className="text-[#126B7D] font-bold">Rp 152.500</p>
+                            <p className="text-[#126B7D] font-bold">Rp {(Number(nominal) + 2500).toLocaleString("id-ID")}</p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +71,7 @@ function DetailPembayaran() {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button onClick={() => navigate("/konfirmasikartudebit")} className="bg-[#126B7D] text-white text-lg font-semibold px-10 py-2 rounded-lg">Konfirmasi</button>
+                    <button onClick={() => navigate("/konfirmasikartudebit", {state: {bank: data?.nama, nomorKartu, nominal}})} className="bg-[#126B7D] text-white text-lg font-semibold px-10 py-2 rounded-lg">Konfirmasi</button>
                 </div>
             </div>
         </div>
