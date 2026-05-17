@@ -1,9 +1,8 @@
 import { useNavigate, useLocation} from "react-router-dom";
 import { useState } from "react";
-import indomaretLogo from "../assets/isisaldo/Indomaret.png";
-import alfamartLogo from "../assets/isisaldo/Alfamart.png";
-import tokoLogo from "../assets/isisaldo/tokoTerdekat.png";
-
+import indomaretLogo from "../../assets/isisaldo/Indomaret.png";
+import alfamartLogo from "../../assets/isisaldo/Alfamart.png";
+import tokoLogo from "../../assets/isisaldo/tokoTerdekat.png";
 
 function IsiSaldoMinimarket() {
     const navigate = useNavigate();
@@ -15,7 +14,7 @@ function IsiSaldoMinimarket() {
     const location = useLocation();
     const minimarket= location.state?.minimarket;
     const dataMinimarket = {
-        indomaret: { nama: "Inomaret", logo: indomaretLogo},
+        indomaret: { nama: "Indomaret", logo: indomaretLogo},
         alfamart: { nama: "Alfamart", logo: alfamartLogo},
         tokoterdekat: { nama: "Toko Terdekat", logo: tokoLogo},
     };
@@ -57,7 +56,7 @@ function IsiSaldoMinimarket() {
                 </div>
             </div>
             <div className="flex justify-end">
-                <button onClick={() => navigate("/detailpembayaranisisaldo", {state: {minimarket: minimarket}})} className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
+                <button onClick={() => navigate("/detailpembayaranisisaldo", {state: {minimarket: minimarket, nominal: nominal}})} className="bg-[#126B7D] text-white px-12 py-3 rounded-lg text-xl">Bayar →</button>
             </div>
         </div>
     </div>

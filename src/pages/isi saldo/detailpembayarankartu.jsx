@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
-function DetailPembayaran() {
+function DetailPembayaranKartu() {
     const navigate = useNavigate();
     const [pin, setPin] = useState(["", "", "", "", ""]);
     const handlePinChange = (value, index) => {
@@ -78,4 +78,4 @@ function DetailPembayaran() {
     );
 }
 
-export default DetailPembayaran;
+export default DetailPembayaranKartu;

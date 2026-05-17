@@ -3,13 +3,14 @@ import Login from "./pages/login.jsx";
 import Register from "./pages/register";
 import Beranda from "./pages/beranda.jsx";
 import Profil from "./pages/profile.jsx";
-import IsiSaldo from "./pages/isisaldo.jsx";
-import IsiSaldoMinimarket from "./pages/isisaldominimarket.jsx";
-import IsiSaldoBank from "./pages/isisaldobank.jsx";
-import DetailPembayaran from "./pages/detailpembayaranIsisaldo.jsx";
-import IsiSaldoKartu from "./pages/isisaldokartu.jsx"
-import DetailPembayaranKartu from "./pages/detailpembayarankartu.jsx";
-import KonfirmasiKartuDebit from "./pages/konfirmasikartudebit.jsx";
+import IsiSaldo from "./pages/isi saldo/isisaldo.jsx";
+import IsiSaldoMinimarket from "./pages/isi saldo/isisaldominimarket.jsx";
+import IsiSaldoBank from "./pages/isi saldo/isisaldobank.jsx";
+import DetailPembayaran from "./pages/isi saldo/detailpembayaranIsisaldo.jsx";
+import IsiSaldoKartu from "./pages/isi saldo/isisaldokartu.jsx"
+import DetailPembayaranKartu from "./pages/isi saldo/detailpembayarankartu.jsx";
+import KonfirmasiMinimarket from "./pages/isi saldo/konfirmasiminimarket.jsx";
+import KonfirmasiKartuDebit from "./pages/isi saldo/konfirmasikartudebit.jsx";
 import GrafikPengeluaran from "./pages/grafikPengeluaran.jsx";
 import Transfer from "./pages/Transfer.jsx";
 import KonfirmasiTransfer from "./pages/KonfirmasiTransfer.jsx";
@@ -32,6 +33,7 @@ function App() {
         <Route path="/detailpembayaranisisaldo" element={<DetailPembayaran />} />
         <Route path="/isisaldokartu" element={<IsiSaldoKartu />} />
         <Route path="/detailpembayarankartu" element={<DetailPembayaranKartu />} />
+        <Route path="/konfirmasiminimarket" element={<KonfirmasiMinimarket />} />
         <Route path="/konfirmasikartudebit" element={<KonfirmasiKartuDebit />} />
         <Route path="/grafikpengeluaran" element={<GrafikPengeluaran />} />
         <Route path="/transfer" element={<Transfer />} />

@@ -1,22 +1,23 @@
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Transfer() {
-
   const [selectedBank, setSelectedBank] = useState({
     nama: "BCA",
     warna: "from-blue-600 via-sky-500 to-cyan-400",
     logo: "🏦",
   });
-
   const [showBank, setShowBank] = useState(false);
-
   const [rekening, setRekening] = useState("");
   const [nama, setNama] = useState("");
   const [nominal, setNominal] = useState("");
   const [catatan, setCatatan] = useState("");
-
   const [showConfirm, setShowConfirm] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
 
@@ -447,9 +448,22 @@ export default function Transfer() {
               </button>
 
               <button
-                onClick={() => {
-                  setShowConfirm(false);
-                  setSuccess(true);
+                onClick={async () => {
+                  try {
+                    const response = await axios.post("http://localhost:8000/api/transfer", {
+                      user_id: user?.id,
+                      nominal: nominal,
+                      nama_penerima: nama,
+                      bank: selectedBank.nama,
+                      rekening: rekening,
+                      catatan: catatan,
+                    });
+                    setShowConfirm(false);
+                    setSuccess(true);
+                  } catch (error) {
+                    alert(error.response?.data?.message || "Transfer gagal");
+                    setShowConfirm(false);
+                  }
                 }}
                 className="bg-[#1F6F78] text-white py-5 rounded-3xl font-semibold text-lg shadow-lg hover:scale-[1.01] transition-all"
               >

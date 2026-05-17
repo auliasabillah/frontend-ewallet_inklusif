@@ -1,8 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import briLogo from "../assets/isisaldo/BRI.png";
-import bniLogo from "../assets/isisaldo/BNI.png";
-import bcaLogo from "../assets/isisaldo/BCA.png";
-import mandiriLogo from "../assets/isisaldo/Mandiri.png";
+import briLogo from "../../assets/isisaldo/BRI.png";
+import bniLogo from "../../assets/isisaldo/BNI.png";
+import bcaLogo from "../../assets/isisaldo/BCA.png";
+import mandiriLogo from "../../assets/isisaldo/Mandiri.png";
 
 function Bank() {
     const navigate = useNavigate();

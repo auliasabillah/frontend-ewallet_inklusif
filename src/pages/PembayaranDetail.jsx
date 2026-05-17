@@ -5,6 +5,7 @@ import MinimarketPayment from "./MinimarketPayment";
 import DebitCreditPayment from "./DebitCreditPayment";
 import VirtualAccountPayment from "./VirtualAccountPayment";
 import InternetBankingPayment from "./InternetBankingPayment";
+import axios from "axios";
 
 export default function PembayaranDetail() {
   const navigate = useNavigate();
@@ -190,7 +191,19 @@ export default function PembayaranDetail() {
               </button>
 
               <button
-                onClick={() => setShowSuccess(true)}
+                onClick={async () => {
+                  const user = JSON.parse(localStorage.getItem('user'));
+                  try {
+                    await axios.post("http://localhost:8000/api/payment", {
+                      user_id: user?.id,
+                      nominal: nominal,
+                      metode: metode,
+                    });
+                    setShowSuccess(true);
+                  } catch (error) {
+                    alert(error.response?.data?.message || "Pembayaran gagal");
+                  }
+                }}
                 className="w-full bg-[#1F6F78] text-white rounded-2xl py-4 font-semibold hover:opacity-90 transition shadow-lg"
               >
                 Saya Sudah Transfer

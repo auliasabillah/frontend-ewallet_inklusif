@@ -1,15 +1,15 @@
 import { useNavigate } from "react-router-dom";
 
-import virtualAcc from "../assets/isisaldo/card.png";
-import Minimarket from "../assets/isisaldo/place.png";
-import debitKredit from "../assets/isisaldo/paypal.png";
-import alfamartLogo from "../assets/isisaldo/Alfamart.png";
-import indomaretLogo from "../assets/isisaldo/Indomaret.png";
-import bcaLogo from "../assets/isisaldo/BCA.png";
-import briLogo from "../assets/isisaldo/BRI.png";
-import bniLogo from "../assets/isisaldo/BNI.png";
-import mandiriLogo from "../assets/isisaldo/Mandiri.png";
-import tokoLogo from "../assets/isisaldo/tokoTerdekat.png";
+import virtualAcc from "../../assets/isisaldo/card.png";
+import Minimarket from "../../assets/isisaldo/place.png";
+import debitKredit from "../../assets/isisaldo/paypal.png";
+import alfamartLogo from "../../assets/isisaldo/Alfamart.png";
+import indomaretLogo from "../../assets/isisaldo/Indomaret.png";
+import bcaLogo from "../../assets/isisaldo/BCA.png";
+import briLogo from "../../assets/isisaldo/BRI.png";
+import bniLogo from "../../assets/isisaldo/BNI.png";
+import mandiriLogo from "../../assets/isisaldo/Mandiri.png";
+import tokoLogo from "../../assets/isisaldo/tokoTerdekat.png";
 
 function IsiSaldo() {
     const navigate = useNavigate();

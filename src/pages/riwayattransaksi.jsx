@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function RiwayatTransaksi() {
   const navigate = useNavigate();
@@ -8,66 +9,6 @@ export default function RiwayatTransaksi() {
   const [filter2, setFilter2] = useState("Bulan Ini");
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
-
-  const data = [
-    {
-      group: "Hari Ini",
-      items: [
-        {
-          title: "Top Up Saldo",
-          desc: "Via Bank BCA",
-          amount: "Rp 500.000",
-          status: "Sukses",
-          type: "topup",
-        },
-        {
-          title: "Pembayaran Listrik",
-          desc: "ID Pelanggan: 123456789",
-          amount: "Rp 120.000",
-          status: "Selesai",
-          type: "keluar",
-        },
-      ],
-    },
-    {
-      group: "Kemarin",
-      items: [
-        {
-          title: "Pembayaran Shopee",
-          desc: "Order: #88210",
-          amount: "Rp 150.000",
-          status: "Selesai",
-          type: "keluar",
-        },
-        {
-          title: "Pembelian Pulsa",
-          desc: "Telkomsel 50.000",
-          amount: "Rp 50.000",
-          status: "Sukses",
-          type: "keluar",
-        },
-      ],
-    },
-    {
-      group: "20 April 2024",
-      items: [
-        {
-          title: "Pembayaran QRIS",
-          desc: "E-STRYXBPLKAS",
-          amount: "Rp 15.000",
-          status: "Selesai",
-          type: "keluar",
-        },
-        {
-          title: "Transfer Uang",
-          desc: "Ke Akul Saibah",
-          amount: "Rp 50.000",
-          status: "Sukses",
-          type: "keluar",
-        },
-      ],
-    },
-  ];
 
   const filterData = (items) => {
     if (filter1 === "Pemasukan") {
@@ -84,11 +25,39 @@ export default function RiwayatTransaksi() {
     return "text-white";
   };
 
+  const [data, setData] = useState([]);
+  const user = JSON.parse(localStorage.getItem('user'));
+  useEffect(() => {
+    console.log("user id:", user?.id);
+    axios.get(`http://localhost:8000/api/riwayat/${user?.id}`)
+    .then(res => {
+      console.log("data riwayat:", res.data);
+      const grouped = {};
+      res.data.forEach(tx => {
+        const tanggal = new Date(tx.created_at).toLocaleDateString('id-ID', {
+          day: 'numeric', month: 'long', year: 'numeric'
+        });
+        if (!grouped[tanggal]) grouped[tanggal] = [];
+        grouped[tanggal].push({
+          title: tx.tipe === 'pemasukan' ? 'Top Up Saldo' : 'Pengeluaran',
+          desc: tx.deskripsi || '-',
+          amount: 'Rp ' + Number(tx.nominal).toLocaleString('id-ID'),
+          status: tx.tipe,
+          type: tx.tipe === 'pemasukan' ? 'topup' : 'keluar',
+        });
+      });
+      const result = Object.keys(grouped).map(g => ({ group: g, items: grouped[g] }));
+      setData(result);
+    })
+      .catch(err => console.log(err));
+    }, 
+  []);
+
   return (
     <div className="min-h-screen bg-gray-100">
 
       {/* HEADER */}
-      <div className="bg-teal-700 text-white p-4 flex items-center gap-2">
+      <div className="bg-[#126B7D] text-white p-4 flex items-center gap-2">
         <span
           onClick={() => navigate(-1)} // 🔥 FIX BACK BUTTON
           className="text-xl cursor-pointer"
@@ -171,7 +140,7 @@ export default function RiwayatTransaksi() {
                 {group.group}
               </p>
 
-              <div className="bg-teal-700 rounded-xl p-3 text-white space-y-3">
+              <div className="bg-[#126B7D] rounded-xl p-3 text-white space-y-3">
                 {filteredItems.map((item, idx) => (
                   <div key={idx}>
                     <div className="flex justify-between items-center">
