@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 function DetailPembayaranKartu() {
     const navigate = useNavigate();
@@ -21,6 +22,23 @@ function DetailPembayaranKartu() {
             Mandiri: { nama: "Mandiri"},
         };
         const data = bankData[bank];
+    const user = JSON.parse(localStorage.getItem('user'));
+        const handleBayar = async () => {
+            try {
+                const response = await axios.post("http://localhost:8000/api/topup", {
+                    user_id: user?.id,
+                    nominal: nominal,
+                });
+                navigate("/konfirmasikartudebit", {
+                    state: {
+                        nominal: nominal, 
+                        metode: data?.nama, 
+                        id_transaksi: response.data.id_transaksi, 
+                        waktu: new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'})}});
+            } catch (error) {
+                alert("Top up gagal");
+            }
+        };
 
     return (
         <div className="w-screen h-screen bg-[#fbfbfb] flex flex-col overflow-hidden">
@@ -71,7 +89,7 @@ function DetailPembayaranKartu() {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button onClick={() => navigate("/konfirmasikartudebit", {state: {bank: data?.nama, nomorKartu, nominal}})} className="bg-[#126B7D] text-white text-lg font-semibold px-10 py-2 rounded-lg">Konfirmasi</button>
+                    <button onClick={handleBayar} className="bg-[#126B7D] text-white text-lg font-semibold px-10 py-2 rounded-lg">Konfirmasi</button>
                 </div>
             </div>
         </div>

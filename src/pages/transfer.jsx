@@ -33,15 +33,31 @@ export default function Transfer() {
 
             <div>
 
-              <p className="text-sm text-gray-500">
-                Transfer Bank
-              </p>
+          {/* BACK BUTTON */}
+          <button
+            onClick={() => navigate("/beranda")}
+            className="mb-4 flex items-center gap-2 text-gray-600 hover:text-[#1F6F78] transition-all"
+  >
 
-              <h1 className="text-4xl font-bold text-gray-800 mt-1">
-                Kirim Uang
-              </h1>
+          <div className="w-10 h-10 rounded-2xl bg-white shadow flex items-center justify-center text-lg">
+              ←
+          </div>
 
-            </div>
+          <span className="font-medium">
+            Kembali
+          </span>
+
+          </button>
+
+          <p className="text-sm text-gray-500">
+            Transfer Bank
+          </p>
+
+        <h1 className="text-4xl font-bold text-gray-800 mt-1">
+            Kirim Uang
+          </h1>
+
+        </div>
 
             <div className="w-14 h-14 rounded-3xl bg-white shadow flex items-center justify-center text-2xl">
               💸
@@ -540,14 +556,16 @@ export default function Transfer() {
             </div>
 
             <button
-              onClick={() => setSuccess(false)}
+              onClick={() => {
+                setSuccess(false);
+                navigate("/beranda");
+            }}
               className="w-full mt-8 bg-[#1F6F78] text-white py-5 rounded-3xl font-semibold text-lg shadow-lg hover:scale-[1.01] transition-all"
-            >
+>
 
-              Selesai
+              Kembali ke Beranda
 
-            </button>
-
+                </button>
           </div>
 
         </div>

@@ -28,21 +28,42 @@ function Profile() {
     const [editNama, setEditNama] = useState(user?.name || "");
     const [editNotelp, setEditNotelp] = useState(user?.notelp || "");
     const [editEmail, setEditEmail] = useState(user?.email || "");
+    const [selectedFile, setSelectedFile] = useState(null);
     const handleSimpanProfile = async () => {
     try {
-        const response = await axios.put(`http://localhost:8000/api/profile/${user?.id}`, {
-            name: editNama,
-            notelp: editNotelp,
-            email: editEmail,
-        });
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("photo", selectedFile);
+
+            const photoRes = await fetch(
+                `http://localhost:8000/api/profile/photo/${user?.id}`,
+                {
+                    method: "POST",
+                    body: formData,
+                    credentials: "include",
+                }
+            );
+            const data = await photoRes.json();
+            console.log("photo response:", data);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setProfileImage(`http://localhost:8000/storage/photos/${data.user.photo}`);
+            setTempImage(null);
+            setSelectedFile(null);
+        }
+
+        const response = await axios.put(
+            `http://localhost:8000/api/profile/${user?.id}`,
+            { name: editNama, notelp: editNotelp, email: editEmail }
+        );
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         setEditProfil(false);
         alert("Profil berhasil diupdate!");
     } catch (error) {
-        console.log(error);
+        console.log("error detail:", error.response?.data);
         alert("Gagal update profil");
     }
-    };
+};
+
 
     return (
     <div className="w-full h-screen bg-white overflow-hidden">

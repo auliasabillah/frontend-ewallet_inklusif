@@ -30,7 +30,7 @@ function DetailPembayaranMinimarket() {
                 alert("Top up gagal");
             }
         };
-    const [timer, setTimer] = useState(24 * 60 * 60);
+    const [timer, setTimer] = useState(24*60*60);
     useEffect(() => {
         const interval = setInterval(() => {
             setTimer(prev => {

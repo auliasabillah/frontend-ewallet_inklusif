@@ -9,213 +9,119 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Beranda() {
-  const navigate = useNavigate();
-  const transactions = [
-    { name: "Seniaku", date: "1 April, 17.20", amount: "Rp 40.000", icon: Bawah, type: "out" },
-    { name: "Leyi", date: "11 Maret, 15.00", amount: "Rp 50.000", icon: Atas, type: "in" },
-    { name: "Indomaret", date: "11 Maret, 14.20", amount: "Rp 100.000", icon: Bawah, type: "out" },
-    { name: "Meyy", date: "8 Maret, 09.00", amount: "Rp 15.000", icon: Atas, type: "in" },
-  ];
-  const [saldo, setSaldo] = useState(0);
-  const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
-  useEffect(() => {
-    axios.get(`http://localhost:8000/api/saldo/${user?.id}`)
-        .then(res => {console.log("saldo:", res.data); setSaldo(res.data.saldo);})
-        .catch(err => console.log(err));
-  }, []);
+    const navigate = useNavigate();
+    const transactions = [
+        { name: "Seniaku", date: "1 April, 17.20", amount: "Rp 40.000", icon: Bawah, type: "out" },
+        { name: "Leyi", date: "11 Maret, 15.00", amount: "Rp 50.000", icon: Atas, type: "in" },
+        { name: "Indomaret", date: "11 Maret, 14.20", amount: "Rp 100.000", icon: Bawah, type: "out" },
+    ];
+    const [saldo, setSaldo] = useState(0);
+    const user = JSON.parse(localStorage.getItem("user"));
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8000/api/saldo/${user?.id}`)
+            .then((res) => setSaldo(res.data.saldo))
+            .catch((err) => console.log(err));
+    }, []);
+    const fotoUser = () => {
+      if (user?.photo) return `http://localhost:8000/storage/photos/${user.photo}`;
+      return profileIcon;
+    };
 
-  return (
-    <div className="w-full min-h-screen bg-white">
-
-      {/* HEADER */}
-      <div className="w-full h-[75px] bg-[#126B7D] flex items-center justify-between px-10">
-        <h1 className="text-white text-[28px] font-semibold">E-Wallet</h1>
-
-        <img
-          src={profileIcon}
-          alt="Profile"
-          className="w-[48px] h-[48px] cursor-pointer invert"
-          onClick={() => navigate("/profile")}
-        />
-      </div>
-
-      {/* CONTENT */}
-      <div className="px-10 py-5">
-
-        {/* SALDO */}
-        <div className="mb-6">
-          <h2 className="text-[28px] font-semibold text-black">
-            Selamat Datang, {user?.name}
-          </h2>
-
-          <p className="text-[16px] mt-2 text-black">Total Saldo</p>
-
-          <h3 className="text-[42px] font-bold text-[#79c7a3]">
-            Rp {saldo.toLocaleString('id-ID')}
-          </h3>
-        </div>
-
-        {/* GRID */}
-        <div className="grid grid-cols-[1.15fr_0.95fr] gap-6">
-
-          {/* LEFT */}
-          <div className="flex flex-col gap-6">
-
-            {/* MENU */}
-            <div className="bg-[#126B7D] rounded-[24px] p-4 shadow-md h-[160px]">
-              <div className="grid grid-cols-3 gap-4 h-full">
-
-                {/* ISI SALDO */}
-                <div
-                  className="flex flex-col items-center justify-center gap-3 cursor-pointer"
-                  onClick={() => navigate("/isisaldo")}
-                >
-                  <div className="bg-[#46A784] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
-                    <img
-                      src={isiSaldo}
-                      alt="Isi Saldo"
-                      className="w-[36px] h-[36px] brightness-0 invert"
-                    />
-                  </div>
-                  <p className="text-white text-[13px] font-medium">
-                    Isi Saldo
-                  </p>
+    return (
+        <div className="w-screen h-screen bg-[#F3F3F3] overflow-hidden flex flex-col">
+            <div className="w-full bg-[#126B7D] rounded-b-[45px] px-[45px] pt-[22px] pb-[24px] flex-shrink-0">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-white text-[36px] font-light">E-Wallet Inklusif</h1>
+                    <img src={fotoUser()} alt="Profile" className="w-[55px] h-[55px] rounded-full object-cover cursor-pointer" onClick={() => navigate("/profile")}/>
                 </div>
-
-                {/* TRANSFER */}
-                <div
-                  className="flex flex-col items-center justify-center gap-3 cursor-pointer"
-                  onClick={() => navigate("/transfer")}
-                >
-                  <div className="bg-[#3FA0D7] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
-                    <img
-                      src={transferIcon}
-                      alt="Transfer"
-                      className="w-[36px] h-[36px] brightness-0 invert"
-                    />
-                  </div>
-                  <p className="text-white text-[13px] font-medium">
-                    Transfer
-                  </p>
-                </div>
-
-                {/* PEMBAYARAN */}
-                <div
-                  className="flex flex-col items-center justify-center gap-3 cursor-pointer"
-                  onClick={() => navigate("/pembayaran")}
-                >
-                  <div className="bg-[#736FBB] w-[70px] h-[70px] rounded-[16px] flex items-center justify-center">
-                    <img
-                      src={paymentIcon}
-                      alt="Pembayaran"
-                      className="w-[36px] h-[36px] brightness-0 invert"
-                    />
-                  </div>
-                  <p className="text-white text-[13px] font-medium">
-                    Pembayaran
-                  </p>
-                </div>
-
-              </div>
-            </div>
-
-            {/* GRAFIK */}
-            <div className="bg-[#126B7D] rounded-[24px] p-5 shadow-md">
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-white text-[18px] font-medium">
-                  Grafik Pengeluaran
-                </h3>
-
-                <p
-                  onClick={() => navigate("/grafikpengeluaran")}
-                  className="text-white text-[14px] cursor-pointer"
-                >
-                  Detail →
-                </p>
-              </div>
-
-              <svg viewBox="0 0 400 170" className="w-full h-[160px]">
-                <line
-                  stroke="#79c7a3"
-                  strokeWidth="5"
-                  x1="30"
-                  y1="120"
-                  x2="370"
-                  y2="120"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-
-          </div>
-
-          {/* RIGHT */}
-          <div className="bg-[#126B7D] rounded-[24px] p-5 shadow-md flex flex-col">
-
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-white text-[20px] font-medium">
-                Riwayat Transaksi
-              </h3>
-
-              
-              <p
-                onClick={() => navigate("/riwayat")}
-                className="text-white text-[14px] cursor-pointer"
-              >
-                Detail →
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3">
-
-              {transactions.map((tx, i) => (
-                <div
-                  key={i}
-                  className="flex justify-between items-center py-2 border-b border-white/20"
-                >
-                  <div className="flex items-center gap-3">
-
-                    <img
-                      src={tx.icon}
-                      alt={tx.name}
-                      className={`w-[40px] h-[40px] rounded-[10px] p-2 ${
-                        tx.type === "in"
-                          ? "bg-[#4ecb8a]"
-                          : "bg-[#e07070]"
-                      }`}
-                    />
-
-                    <div>
-                      <p className="text-white text-[15px] font-medium">
-                        {tx.name}
-                      </p>
-                      <p className="text-[#d9edf1] text-[11px]">
-                        {tx.date}
-                      </p>
+                <div className="w-full bg-[#3790A2] rounded-[32px] mt-[30px] mb-[4px] shadow-[0_8px_24px_rgba(8,58,70,0.8)] px-[28px] py-[18px]">
+                    <h2 className="text-white text-[26px] font-light text-center">Selamat Datang, {user?.name}</h2>
+                    <div className="flex justify-between items-center mt-[58px]">
+                        <div>
+                            <p className="text-white text-[22px] font-light">Total Saldo</p>
+                            <h1 className="text-[#7AD0A5] text-[52px] font-bold mt-1 leading-none">Rp {Number(saldo).toLocaleString("id-ID")}</h1>
+                        </div>
+                        <div className="flex gap-[22px]">
+                            <div onClick={() => navigate("/isisaldo")} className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110">
+                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#46A784] flex items-center justify-center">
+                                    <img src={isiSaldo} alt="Isi Saldo" className="w-[36px] h-[36px] brightness-0 invert" />
+                                </div>
+                                <p className="text-white text-[15px] mt-1">Isi Saldo</p>
+                            </div>
+                            <div onClick={() => navigate("/transfer")} className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110">
+                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#3FA0D7] flex items-center justify-center">
+                                    <img src={transferIcon} alt="Transfer" className="w-[36px] h-[36px] brightness-0 invert" />
+                                </div>
+                                <p className="text-white text-[15px] mt-1">Transfer</p>
+                            </div>
+                            <div onClick={() => navigate("/pembayaran")} className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110">
+                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#736FBB] flex items-center justify-center">
+                                    <img src={paymentIcon} alt="Pembayaran" className="w-[36px] h-[36px] brightness-0 invert" />
+                                </div>
+                                <p className="text-white text-[15px] mt-1">Pembayaran</p>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-
-                  <p
-                    className={`text-[15px] font-semibold ${
-                      tx.type === "in"
-                        ? "text-[#8ce0b0]"
-                        : "text-[#ff8f86]"
-                    }`}
-                  >
-                    {tx.amount}
-                  </p>
                 </div>
-              ))}
-
             </div>
-
-          </div>
-
+            <div className="flex gap-[22px] px-[34px] mt-[18px] flex-1">
+                <div className="flex-1 h-[358px] bg-[#126B7D] shadow-[0_8px_24px_rgba(8,58,70,0.8)] rounded-[28px] p-[24px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-white text-[24px] font-light">Grafik Pengeluaran</h2>
+                        <p onClick={() => navigate("/grafikpengeluaran")} className="text-white text-[16px] cursor-pointer transition-transform duration-200 hover:scale-110">Detail →</p>
+                    </div>
+                    <div className="w-full mt-[20px] flex-1" style={{ height: "calc(100% - 60px)" }}>
+                        <svg viewBox="0 0 600 260" className="w-full h-full" fill="none">
+                            <defs>
+                                <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="rgba(217,217,217,0.5)" />
+                                    <stop offset="100%" stopColor="rgba(47,111,128,0)" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M0 40 C40 20,40 80,70 70 C120 40,90 170,160 140 C220 100,240 170,300 100 C360 40,400 220,450 120 C500 60,540 150,600 60 L600 260 L0 260 Z" fill="url(#grad)"/>
+                            <path d="M0 40 C40 20,40 80,70 70 C120 40,90 170,160 140 C220 100,240 170,300 100 C360 40,400 220,450 120 C500 60,540 150,600 60" stroke="rgba(0,0,0,0.7)" strokeWidth="2.5"/>
+                            <line x1="300" y1="10" x2="300" y2="245" stroke="white" strokeWidth="1.5" strokeDasharray="4 3" />
+                            <circle cx="300" cy="100" r="7" fill="#2F6F80" stroke="white" strokeWidth="3" />
+                            <text x="10"  y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Jan</text>
+                            <text x="100" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Feb</text>
+                            <text x="190" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Mar</text>
+                            <text x="285" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Apr</text>
+                            <text x="395" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Mei</text>
+                            <text x="505" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">Jun</text>
+                        </svg>
+                    </div>
+                </div>
+                <div className="flex-1 h-[358px] bg-[#126B7D] shadow-[0_8px_24px_rgba(8,58,70,0.8)] rounded-[28px] p-[24px]">
+                    <div className="flex justify-between items-center">
+                        <h2 className="text-white text-[24px] font-light">Riwayat Transaksi</h2>
+                        <p onClick={() => navigate("/riwayat")} className="text-white text-[16px] cursor-pointer transition-transform duration-200 hover:scale-110">Detail →</p>
+                    </div>
+                    <div className="mt-[48px] flex flex-col">
+                        {transactions.map((tx, i) => (
+                            <div key={i} className="flex justify-between items-center py-[13px] border-b border-white/20 last:border-b-0">
+                                <div className="flex items-center gap-[14px]">
+                                    <img src={tx.icon} alt={tx.name} className={`w-[48px] h-[48px] rounded-[10px] p-[10px] ${ 
+                                      tx.type === "in" ? "bg-[#4ECCA3]" : "bg-[#FF6B6B]"
+                                      }`}/>
+                                    <div>
+                                        <p className="text-white text-[17px]">{tx.name}</p>
+                                        <p className="text-white/60 text-[13px]">{tx.date}</p>
+                                    </div>
+                                </div>
+                                <p className={`text-[17px] font-medium ${
+                                    tx.type === "in" ? "text-[#4ECCA3]" : "text-[#FF6B6B]"
+                                }`}>
+                                    {tx.amount}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+            <div className="h-[20px] flex-shrink-0" />
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Beranda;

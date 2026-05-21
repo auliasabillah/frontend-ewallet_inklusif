@@ -683,24 +683,24 @@ export default function PembayaranDetail() {
                     Hubungi bantuan jika mengalami kendala transaksi
                   </p>
                   {/* SUCCESS MODAL */}
-{showSuccess && (
+                  {showSuccess && (
 
-  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+                <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
 
-    <div className="bg-white rounded-[40px] p-10 w-full max-w-lg shadow-2xl text-center">
+                <div className="bg-white rounded-[40px] p-10 w-full max-w-lg shadow-2xl text-center">
 
-      <div className="w-28 h-28 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center text-6xl mx-auto shadow-xl">
+                <div className="w-28 h-28 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center text-6xl mx-auto shadow-xl">
 
-        ✅
+                 ✅
 
-      </div>
+                </div>
 
-      <h1 className="text-4xl font-bold text-gray-800 mt-8">
-        Pembayaran Berhasil
-      </h1>
+                <h1 className="text-4xl font-bold text-gray-800 mt-8">
+                   Pembayaran Berhasil
+                </h1>
 
-      <p className="text-gray-500 mt-3 text-lg">
-        Pembayaran berhasil diverifikasi.
+                <p className="text-gray-500 mt-3 text-lg">
+                  Pembayaran berhasil diverifikasi.
       </p>
 
       <div className="bg-gray-50 rounded-[30px] p-6 mt-8 text-left space-y-4 border">
@@ -744,8 +744,11 @@ export default function PembayaranDetail() {
       </div>
 
       <button
-        onClick={() => navigate("/")}
-        className="w-full mt-8 bg-[#1F6F78] text-white py-5 rounded-3xl font-semibold text-lg"
+        onClick={() => {
+          setShowSuccess(false);
+          navigate("/beranda");
+        }}
+        className="w-full mt-8 bg-[#1F6F78] text-white py-5 rounded-3xl font-semibold text-lg hover:opacity-90 transition"
       >
 
         Selesai
@@ -757,6 +760,7 @@ export default function PembayaranDetail() {
   </div>
 
 )}
+
                 </div>
 
               </div>
