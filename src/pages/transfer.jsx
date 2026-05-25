@@ -466,7 +466,7 @@ export default function Transfer() {
               <button
                 onClick={async () => {
                   try {
-                    const response = await axios.post("http://localhost:8000/api/transfer", {
+                    const response = await axios.post("http://127.0.0.1:8000/api/transfer", {
                       user_id: user?.id,
                       nominal: nominal,
                       nama_penerima: nama,

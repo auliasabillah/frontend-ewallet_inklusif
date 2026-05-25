@@ -16,7 +16,7 @@ function DetailPembayaranMinimarket() {
         const user = JSON.parse(localStorage.getItem('user'));
         const handleBayar = async () => {
             try {
-                const response = await axios.post("http://localhost:8000/api/topup", {
+                const response = await axios.post("http://127.0.0.1:8000/api/topup", {
                     user_id: user?.id,
                     nominal: nominal,
                 });

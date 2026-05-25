@@ -29,7 +29,7 @@ export default function RiwayatTransaksi() {
   const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
     console.log("user id:", user?.id);
-    axios.get(`http://localhost:8000/api/riwayat/${user?.id}`)
+    axios.get(`http://127.0.0.1:8000/api/riwayat/${user?.id}`)
     .then(res => {
       console.log("data riwayat:", res.data);
       const grouped = {};

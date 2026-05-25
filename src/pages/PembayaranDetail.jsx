@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TransferLainnya from "./TransferLainnya";
 import MinimarketPayment from "./MinimarketPayment";
@@ -14,6 +14,29 @@ export default function PembayaranDetail() {
   const nominal = location.state?.nominal || 200000;
   const metode = location.state?.metode || "ATM Transfer";
   const [showSuccess, setShowSuccess] = useState(false);
+  const [timer, setTimer] = useState(24 * 60 * 60);
+
+  useEffect(() => {
+  const interval = setInterval(() => {
+    setTimer((prev) => {
+      if (prev <= 0) {
+        clearInterval(interval);
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
+
+const formatTimer = (detik) => {
+  const jam = Math.floor(detik / 3600);
+  const menit = Math.floor((detik % 3600) / 60);
+  const detikSisa = detik % 60;
+
+  return `${String(jam).padStart(2, "0")} : ${String(menit).padStart(2, "0")} : ${String(detikSisa).padStart(2, "0")}`;
+};
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -168,7 +191,7 @@ export default function PembayaranDetail() {
                   </p>
 
                   <h2 className="text-2xl font-bold text-yellow-800 mt-1">
-                    23 : 59 : 48
+                    {formatTimer(timer)}
                   </h2>
                 </div>
 
@@ -192,18 +215,23 @@ export default function PembayaranDetail() {
 
               <button
                 onClick={async () => {
-                  const user = JSON.parse(localStorage.getItem('user'));
-                  try {
-                    await axios.post("http://localhost:8000/api/payment", {
-                      user_id: user?.id,
-                      nominal: nominal,
-                      metode: metode,
-                    });
-                    setShowSuccess(true);
-                  } catch (error) {
-                    alert(error.response?.data?.message || "Pembayaran gagal");
-                  }
-                }}
+                const user = JSON.parse(localStorage.getItem('user'));
+
+                try {
+                await axios.post("http://127.0.0.1:8000/api/topup", {
+                  user_id: user?.id,
+                  nominal: nominal,
+                  metode: metode,
+            });
+
+                setShowSuccess(true);
+
+                } catch (error) {
+                console.log(error.response);
+                  alert(JSON.stringify(error.response?.data));
+                }
+            }}
+
                 className="w-full bg-[#1F6F78] text-white rounded-2xl py-4 font-semibold hover:opacity-90 transition shadow-lg"
               >
                 Saya Sudah Transfer
