@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import avatarIcon from "../assets/profile/avatar.png";
-import telpIcon from "../assets/profile/call.png";
-import editIcon from "../assets/profile/edit.png";
-import emailIcon from "../assets/profile/email.png";
-import loginIcon from "../assets/profile/login.png";
-import avatarProfile from "../assets/profile/profile.png";
+import avatarIcon from "../../assets/profile/avatar.png";
+import telpIcon from "../../assets/profile/call.png";
+import editIcon from "../../assets/profile/edit.png";
+import emailIcon from "../../assets/profile/email.png";
+import loginIcon from "../../assets/profile/login.png";
+import avatarProfile from "../../assets/profile/profile.png";
 import axios from "axios";
 
 function Profile() {

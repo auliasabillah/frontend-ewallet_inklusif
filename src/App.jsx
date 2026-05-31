@@ -2,25 +2,25 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 /* USER */
-import Login from "./pages/login.jsx";
-import Register from "./pages/register";
-import Beranda from "./pages/beranda.jsx";
-import Profil from "./pages/profile.jsx";
-import IsiSaldo from "./pages/isi saldo/isisaldo.jsx";
-import IsiSaldoMinimarket from "./pages/isi saldo/isisaldominimarket.jsx";
-import IsiSaldoBank from "./pages/isi saldo/isisaldobank.jsx";
-import DetailPembayaran from "./pages/isi saldo/detailpembayaranIsisaldo.jsx";
-import IsiSaldoKartu from "./pages/isi saldo/isisaldokartu.jsx";
-import DetailPembayaranKartu from "./pages/isi saldo/detailpembayarankartu.jsx";
-import KonfirmasiMinimarket from "./pages/isi saldo/konfirmasiminimarket.jsx";
-import KonfirmasiKartuDebit from "./pages/isi saldo/konfirmasikartudebit.jsx";
-import GrafikPengeluaran from "./pages/grafikPengeluaran.jsx";
-import Transfer from "./pages/Transfer.jsx";
-import KonfirmasiTransfer from "./pages/KonfirmasiTransfer.jsx";
-import Pembayaran from "./pages/pembayaran.jsx";
-import PembayaranDetail from "./pages/PembayaranDetail.jsx";
-import SuksesPembayaran from "./pages/SuksesPembayaran.jsx";
-import RiwayatTransaksi from "./pages/riwayattransaksi.jsx";
+import Login from "./pages/user/login.jsx";
+import Register from "./pages/user/register.jsx";
+import Beranda from "./pages/user/beranda.jsx";
+import Profil from "./pages/user/profile.jsx";
+import IsiSaldo from "./pages/user/IsiSaldo/isisaldo.jsx";
+import IsiSaldoMinimarket from "./pages/user/IsiSaldo/isisaldominimarket.jsx";
+import IsiSaldoBank from "./pages/user/IsiSaldo/isisaldobank.jsx";
+import DetailPembayaran from "./pages/user/IsiSaldo/detailpembayaranisisaldo.jsx";
+import IsiSaldoKartu from "./pages/user/IsiSaldo/isisaldokartu.jsx";
+import DetailPembayaranKartu from "./pages/user/IsiSaldo/detailpembayarankartu.jsx";
+import KonfirmasiMinimarket from "./pages/user/IsiSaldo/konfirmasiminimarket.jsx";
+import KonfirmasiKartuDebit from "./pages/user/IsiSaldo/konfirmasiKartuDebit.jsx";
+import GrafikPengeluaran from "./pages/user/grafikPengeluaran.jsx";
+import Transfer from "./pages/user/transfer.jsx";
+import KonfirmasiTransfer from "./pages/user/KonfirmasiTransfer.jsx";
+import Pembayaran from "./pages/user/pembayaran.jsx";
+import PembayaranDetail from "./pages/user/PembayaranDetail.jsx";
+import SuksesPembayaran from "./pages/user/SuksesPembayaran.jsx";
+import RiwayatTransaksi from "./pages/user/riwayattransaksi.jsx";
 
 /* ADMIN */
 import AdminLogin from "./pages/admin/loginadmin.jsx";

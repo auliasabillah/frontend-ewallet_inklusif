@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import logoLogin from "../assets/login/login.png";
-import logoEwallet from "../assets/login/ewallet.png";
-import logoGoogle from "../assets/login/google.png";
+import logoLogin from "../../assets/login/login.png";
+import logoEwallet from "../../assets/login/ewallet.png";
+import logoGoogle from "../../assets/login/google.png";
 import axios from "axios";
 
 export default function Login() {

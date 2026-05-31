@@ -19,6 +19,7 @@ function DetailPembayaranMinimarket() {
                 const response = await axios.post("http://127.0.0.1:8000/api/topup", {
                     user_id: user?.id,
                     nominal: nominal,
+                    metode: data?.nama,
                 });
                 navigate("/konfirmasiminimarket", {
                     state: {

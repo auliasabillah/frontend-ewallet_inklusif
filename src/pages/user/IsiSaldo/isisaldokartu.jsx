@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import debitKredit from "../../assets/isisaldo/paypal.png";
+import debitKredit from "../../../assets/isisaldo/paypal.png";
 
 function DebitKredit() {
     const navigate = useNavigate();

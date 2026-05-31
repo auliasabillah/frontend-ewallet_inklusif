@@ -1,11 +1,11 @@
 
 import { useNavigate } from "react-router-dom";
-import profileIcon from "../assets/dashboard/user.png";
-import isiSaldo from "../assets/dashboard/plus.png";
-import transferIcon from "../assets/dashboard/send.png";
-import paymentIcon from "../assets/dashboard/card.png";
-import Atas from "../assets/dashboard/atas.png";
-import Bawah from "../assets/dashboard/bawah.png";
+import profileIcon from "../../assets/dashboard/user.png";
+import isiSaldo from "../../assets/dashboard/plus.png";
+import transferIcon from "../../assets/dashboard/send.png";
+import paymentIcon from "../../assets/dashboard/card.png";
+import Atas from "../../assets/dashboard/atas.png";
+import Bawah from "../../assets/dashboard/bawah.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -37,7 +37,7 @@ function Beranda() {
     };
 
     return (
-        <div className="w-screen min-h-screen bg-[#EEF2EC] overflow-x-hidden">
+        <div className="w-screen min-h-screen bg-white overflow-x-hidden">
 
             {/* HEADER */}
             <div className="w-full bg-[#1A7082] rounded-b-[45px] px-[22px] pt-[18px] pb-[26px]">
@@ -265,7 +265,7 @@ function Beranda() {
                                     <img
                                         src={tx.jenis === "pemasukan" ? Atas : Bawah}
                                         alt="icon"
-                                        className="w-[52px] h-[52px] rounded-[14px] p-[10px] bg-[#FF6B6B]"
+                                        className={`w-[52px] h-[52px] rounded-[14px] p-[10px] ${tx.jenis === "pemasukan" ? "bg-[#59B78A]" : "bg-[#FF6B6B]"}`}
                                     />
 
                                     <div>
@@ -287,7 +287,7 @@ function Beranda() {
 
                                 </div>
 
-                                <p className="text-[#FF6B6B] text-[17px] font-bold">
+                                <p className={`text-[17px] font-bold ${tx.jenis === "pemasukan" ? "text-[#98D0A6]" : "text-[#FF6B6B]"}`}>
                                     Rp {Number(tx.nominal).toLocaleString("id-ID")}
                                 </p>
 

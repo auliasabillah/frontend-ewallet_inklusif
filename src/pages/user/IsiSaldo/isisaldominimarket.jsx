@@ -1,8 +1,8 @@
 import { useNavigate, useLocation} from "react-router-dom";
 import { useState } from "react";
-import indomaretLogo from "../../assets/isisaldo/Indomaret.png";
-import alfamartLogo from "../../assets/isisaldo/Alfamart.png";
-import tokoLogo from "../../assets/isisaldo/tokoTerdekat.png";
+import indomaretLogo from "../../../assets/isisaldo/Indomaret.png";
+import alfamartLogo from "../../../assets/isisaldo/Alfamart.png";
+import tokoLogo from "../../../assets/isisaldo/tokoTerdekat.png";
 
 function IsiSaldoMinimarket() {
     const navigate = useNavigate();
