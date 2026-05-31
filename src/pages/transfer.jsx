@@ -308,7 +308,7 @@ export default function Transfer() {
               </p>
 
               <input
-                type="number"
+                type="text"
                 placeholder="Masukkan nominal transfer"
                 value={nominal}
                 onChange={(e) => setNominal(e.target.value)}
@@ -465,6 +465,22 @@ export default function Transfer() {
 
               <button
                 onClick={async () => {
+
+                  if (!rekening || !nama || !nominal) {
+                    alert("Lengkapi semua data transfer");
+                    return;
+                  }
+
+                  if (nominal <= 0) {
+                    alert("Nominal harus lebih dari 0");
+                    return;
+                  }
+
+                  if (rekening.length < 8) {
+                    alert("Nomor rekening terlalu pendek");
+                    return;
+                  }
+                  
                   try {
                     const response = await axios.post("http://127.0.0.1:8000/api/transfer", {
                       user_id: user?.id,

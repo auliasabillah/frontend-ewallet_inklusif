@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom";
 import profileIcon from "../assets/dashboard/user.png";
 import isiSaldo from "../assets/dashboard/plus.png";
@@ -36,118 +37,164 @@ function Beranda() {
     };
 
     return (
-        <div className="w-screen h-screen bg-[#F3F3F3] overflow-hidden flex flex-col">
-            <div className="w-full bg-[#126B7D] rounded-b-[45px] px-[45px] pt-[22px] pb-[24px] flex-shrink-0">
+        <div className="w-screen min-h-screen bg-[#EEF2EC] overflow-x-hidden">
+
+            {/* HEADER */}
+            <div className="w-full bg-[#1A7082] rounded-b-[45px] px-[22px] pt-[18px] pb-[26px]">
+
+                {/* TOP */}
                 <div className="flex justify-between items-center">
-                    <h1 className="text-white text-[36px] font-light">
+
+                    <h1 className="text-white text-[32px] font-light tracking-wide">
                         E-Wallet Inklusif
                     </h1>
 
                     <img
                         src={fotoUser()}
                         alt="Profile"
-                        className="w-[55px] h-[55px] rounded-full object-cover cursor-pointer"
+                        className="w-[54px] h-[54px] rounded-full object-cover cursor-pointer border-2 border-white/20"
                         onClick={() => navigate("/profile")}
                     />
+
                 </div>
 
-                <div className="w-full bg-[#3790A2] rounded-[32px] mt-[30px] mb-[4px] shadow-[0_8px_24px_rgba(8,58,70,0.8)] px-[28px] py-[18px]">
-                    <h2 className="text-white text-[26px] font-light text-center">
+                {/* CARD */}
+                <div className="w-full bg-[#4095A7] rounded-[36px] mt-[26px] px-[40px] py-[32px] shadow-[0_10px_25px_rgba(0,0,0,0.18)]">
+
+                    <h2 className="text-white text-[24px] font-light text-center">
                         Selamat Datang, {user?.name}
                     </h2>
 
                     <div className="flex justify-between items-center mt-[58px]">
+
+                        {/* SALDO */}
                         <div>
-                            <p className="text-white text-[22px] font-light">
+
+                            <p className="text-white text-[20px] font-light">
                                 Total Saldo
                             </p>
 
-                            <h1 className="text-[#7AD0A5] text-[52px] font-bold mt-1 leading-none">
+                            <h1 className="text-[#98D0A6] text-[60px] font-bold mt-2 leading-none">
                                 Rp {Number(saldo).toLocaleString("id-ID")}
                             </h1>
+
                         </div>
 
-                        <div className="flex gap-[22px]">
+                        {/* MENU */}
+                        <div className="flex gap-[24px]">
+
+                            {/* ISI SALDO */}
                             <div
                                 onClick={() => navigate("/isisaldo")}
-                                className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                className="flex flex-col items-center cursor-pointer"
                             >
-                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#46A784] flex items-center justify-center">
+
+                                <div className="w-[84px] h-[84px] rounded-[24px] bg-[#59B78A] flex items-center justify-center shadow-md">
+
                                     <img
                                         src={isiSaldo}
                                         alt="Isi Saldo"
-                                        className="w-[36px] h-[36px] brightness-0 invert"
+                                        className="w-[40px] h-[40px] brightness-0 invert"
                                     />
+
                                 </div>
 
-                                <p className="text-white text-[15px] mt-1">
+                                <p className="text-white text-[16px] mt-2">
                                     Isi Saldo
                                 </p>
+
                             </div>
 
+                            {/* TRANSFER */}
                             <div
                                 onClick={() => navigate("/transfer")}
-                                className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                className="flex flex-col items-center cursor-pointer"
                             >
-                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#3FA0D7] flex items-center justify-center">
+
+                                <div className="w-[84px] h-[84px] rounded-[24px] bg-[#4FA0D8] flex items-center justify-center shadow-md">
+
                                     <img
                                         src={transferIcon}
                                         alt="Transfer"
-                                        className="w-[36px] h-[36px] brightness-0 invert"
+                                        className="w-[40px] h-[40px] brightness-0 invert"
                                     />
+
                                 </div>
 
-                                <p className="text-white text-[15px] mt-1">
+                                <p className="text-white text-[16px] mt-2">
                                     Transfer
                                 </p>
+
                             </div>
 
+                            {/* PEMBAYARAN */}
                             <div
                                 onClick={() => navigate("/pembayaran")}
-                                className="flex flex-col items-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                className="flex flex-col items-center cursor-pointer"
                             >
-                                <div className="w-[80px] h-[80px] rounded-[14px] bg-[#736FBB] flex items-center justify-center">
+
+                                <div className="w-[84px] h-[84px] rounded-[24px] bg-[#7B6ED6] flex items-center justify-center shadow-md">
+
                                     <img
                                         src={paymentIcon}
                                         alt="Pembayaran"
-                                        className="w-[36px] h-[36px] brightness-0 invert"
+                                        className="w-[40px] h-[40px] brightness-0 invert"
                                     />
+
                                 </div>
 
-                                <p className="text-white text-[15px] mt-1">
+                                <p className="text-white text-[16px] mt-2">
                                     Pembayaran
                                 </p>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
 
-            <div className="flex gap-[22px] px-[34px] mt-[18px] flex-1">
-                <div className="flex-1 h-[358px] bg-[#126B7D] shadow-[0_8px_24px_rgba(8,58,70,0.8)] rounded-[28px] p-[24px]">
+            {/* CONTENT */}
+            <div className="flex gap-[20px] px-[34px] mt-[20px] pb-[20px]">
+
+                {/* GRAFIK */}
+                <div className="flex-1 h-[365px] bg-[#176F82] rounded-[30px] p-[26px] shadow-[0_10px_25px_rgba(0,0,0,0.18)]">
+
                     <div className="flex justify-between items-center">
-                        <h2 className="text-white text-[24px] font-light">
+
+                        <h2 className="text-white text-[22px] font-medium">
                             Grafik Pengeluaran
                         </h2>
 
                         <p
                             onClick={() => navigate("/grafikpengeluaran")}
-                            className="text-white text-[16px] cursor-pointer transition-transform duration-200 hover:scale-110"
+                            className="text-white text-[16px] cursor-pointer"
                         >
                             Detail →
                         </p>
+
                     </div>
 
                     <div
-                        className="w-full mt-[20px] flex-1"
+                        className="w-full mt-[20px]"
                         style={{ height: "calc(100% - 60px)" }}
                     >
+
                         <svg viewBox="0 0 600 260" className="w-full h-full" fill="none">
+
                             <defs>
+
                                 <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="rgba(217,217,217,0.5)" />
-                                    <stop offset="100%" stopColor="rgba(47,111,128,0)" />
+
+                                    <stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
+
+                                    <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+
                                 </linearGradient>
+
                             </defs>
 
                             <path
@@ -157,8 +204,8 @@ function Beranda() {
 
                             <path
                                 d="M0 40 C40 20,40 80,70 70 C120 40,90 170,160 140 C220 100,240 170,300 100 C360 40,400 220,450 120 C500 60,540 150,600 60"
-                                stroke="rgba(0,0,0,0.7)"
-                                strokeWidth="2.5"
+                                stroke="#0D1D25"
+                                strokeWidth="3"
                             />
 
                             <line
@@ -174,71 +221,60 @@ function Beranda() {
                             <circle
                                 cx="300"
                                 cy="100"
-                                r="7"
-                                fill="#2F6F80"
+                                r="8"
+                                fill="#F6D1B7"
                                 stroke="white"
                                 strokeWidth="3"
                             />
 
-                            <text x="10" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Jan
-                            </text>
-                            <text x="100" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Feb
-                            </text>
-                            <text x="190" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Mar
-                            </text>
-                            <text x="285" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Apr
-                            </text>
-                            <text x="395" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Mei
-                            </text>
-                            <text x="505" y="255" fill="rgba(255,255,255,0.7)" fontSize="13">
-                                Jun
-                            </text>
                         </svg>
+
                     </div>
+
                 </div>
 
-                <div className="flex-1 h-[358px] bg-[#126B7D] shadow-[0_8px_24px_rgba(8,58,70,0.8)] rounded-[28px] p-[24px]">
+                {/* RIWAYAT */}
+                <div className="flex-1 h-[365px] bg-[#176F82] rounded-[30px] p-[26px] shadow-[0_10px_25px_rgba(0,0,0,0.18)]">
+
                     <div className="flex justify-between items-center">
-                        <h2 className="text-white text-[24px] font-light">
+
+                        <h2 className="text-white text-[22px] font-medium">
                             Riwayat Transaksi
                         </h2>
 
                         <p
                             onClick={() => navigate("/riwayat")}
-                            className="text-white text-[16px] cursor-pointer transition-transform duration-200 hover:scale-110"
+                            className="text-white text-[16px] cursor-pointer"
                         >
                             Detail →
                         </p>
+
                     </div>
 
-                    <div className="mt-[48px] flex flex-col">
+                    <div className="mt-[38px] flex flex-col">
+
                         {transactions.map((tx) => (
+
                             <div
                                 key={tx.id}
-                                className="flex justify-between items-center py-[13px] border-b border-white/20 last:border-b-0"
+                                className="flex justify-between items-center py-[14px] border-b border-white/10 last:border-b-0"
                             >
+
                                 <div className="flex items-center gap-[14px]">
+
                                     <img
                                         src={tx.jenis === "pemasukan" ? Atas : Bawah}
                                         alt="icon"
-                                        className={`w-[48px] h-[48px] rounded-[10px] p-[10px] ${
-                                            tx.jenis === "pemasukan"
-                                                ? "bg-[#4ECCA3]"
-                                                : "bg-[#FF6B6B]"
-                                        }`}
+                                        className="w-[52px] h-[52px] rounded-[14px] p-[10px] bg-[#FF6B6B]"
                                     />
 
                                     <div>
-                                        <p className="text-white text-[17px]">
+
+                                        <p className="text-white text-[17px] font-medium">
                                             {tx.deskripsi}
                                         </p>
 
-                                        <p className="text-white/60 text-[13px]">
+                                        <p className="text-white/70 text-[13px]">
                                             {new Date(tx.created_at).toLocaleDateString("id-ID", {
                                                 day: "numeric",
                                                 month: "long",
@@ -246,25 +282,25 @@ function Beranda() {
                                                 minute: "2-digit",
                                             })}
                                         </p>
+
                                     </div>
+
                                 </div>
 
-                                <p
-                                    className={`text-[17px] font-medium ${
-                                        tx.jenis === "pemasukan"
-                                            ? "text-[#4ECCA3]"
-                                            : "text-[#FF6B6B]"
-                                    }`}
-                                >
+                                <p className="text-[#FF6B6B] text-[17px] font-bold">
                                     Rp {Number(tx.nominal).toLocaleString("id-ID")}
                                 </p>
+
                             </div>
+
                         ))}
+
                     </div>
+
                 </div>
+
             </div>
 
-            <div className="h-[20px] flex-shrink-0" />
         </div>
     );
 }

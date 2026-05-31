@@ -21,7 +21,8 @@ export default function Login() {
         alert(error.response?.data?.message || "Login gagal");
     }
 };
-    
+
+         // update
     return (
     <div className="w-full min-h-screen flex bg-white">
         <div className="w-1/2 bg-gradient-to-br from-teal-500 to-teal-800 flex flex-col justify-between px-16 py-12">
@@ -84,4 +85,4 @@ export default function Login() {
         </div>
     </div>
   );
-}
+}       

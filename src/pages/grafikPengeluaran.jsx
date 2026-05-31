@@ -68,6 +68,14 @@ function GrafikPengeluaran() {
     },
   };
 
+  const metodeTerbesar =
+  grafikData.labels.length > 0
+    ? grafikData.labels[
+        grafikData.datasets[0].data.indexOf(
+          Math.max(...grafikData.datasets[0].data)
+        )
+      ]
+    : "-";
   return (
     <div className="min-h-screen bg-gray-200">
       {/* HEADER */}
@@ -133,7 +141,10 @@ function GrafikPengeluaran() {
           </div>
 
           <div className="mt-4 text-sm px-2 text-center">
-            Pengeluaran terbesar harian ada pada metode QRIS.
+            <p>
+              Pengeluaran terbesar harian ada pada metode{" "}
+              <span className="font-bold">{metodeTerbesar}</span>.
+            </p>
           </div>
         </div>
       </div>

@@ -39,11 +39,14 @@ export default function RiwayatTransaksi() {
         });
         if (!grouped[tanggal]) grouped[tanggal] = [];
         grouped[tanggal].push({
-          title: tx.tipe === 'pemasukan' ? 'Top Up Saldo' : 'Pengeluaran',
+          title:
+            tx.jenis === 'pemasukan'
+            ? 'Top Up Saldo'
+            : 'Transfer Keluar',
           desc: tx.deskripsi || '-',
           amount: 'Rp ' + Number(tx.nominal).toLocaleString('id-ID'),
-          status: tx.tipe,
-          type: tx.tipe === 'pemasukan' ? 'topup' : 'keluar',
+          status: tx.jenis,
+          type: tx.jenis === 'pemasukan' ? 'topup' : 'keluar',
         });
       });
       const result = Object.keys(grouped).map(g => ({ group: g, items: grouped[g] }));
@@ -59,7 +62,7 @@ export default function RiwayatTransaksi() {
       {/* HEADER */}
       <div className="bg-[#126B7D] text-white p-4 flex items-center gap-2">
         <span
-          onClick={() => navigate(-1)} // 🔥 FIX BACK BUTTON
+          onClick={() => navigate(-1)} 
           className="text-xl cursor-pointer"
         >
           ←
