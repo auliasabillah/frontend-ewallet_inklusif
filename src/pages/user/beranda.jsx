@@ -1,4 +1,3 @@
-
 import { useNavigate } from "react-router-dom";
 import profileIcon from "../../assets/dashboard/user.png";
 import isiSaldo from "../../assets/dashboard/plus.png";
@@ -8,12 +7,17 @@ import Atas from "../../assets/dashboard/atas.png";
 import Bawah from "../../assets/dashboard/bawah.png";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Tooltip } from "chart.js";
+import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
 function Beranda() {
     const navigate = useNavigate();
     const [saldo, setSaldo] = useState(0);
     const [transactions, setTransactions] = useState([]);
     const user = JSON.parse(localStorage.getItem("user"));
+    const [grafikData, setGrafikData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
         axios
@@ -27,6 +31,25 @@ function Beranda() {
                 setTransactions(res.data.slice(0, 3));
             })
             .catch((err) => console.log(err));
+        const bulan = new Date().getMonth() + 1;
+        
+        axios.get(`http://127.0.0.1:8000/api/pengeluaran/${user?.id}?bulan=${bulan}`)
+        .then((res) => {
+            setGrafikData({
+                labels: Object.keys(res.data),
+                datasets: [{
+                    data: Object.values(res.data),
+                    borderColor: "rgba(255,255,255,0.9)",
+                    backgroundColor: "rgba(255,255,255,0.15)",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#F6D1B7",
+                    pointRadius: 5,
+                    tension: 0.4,
+                    fill: true,
+                }],
+            });
+        })
+        .catch((err) => console.log(err));
     }, []);
 
     const fotoUser = () => {
@@ -182,55 +205,17 @@ function Beranda() {
                         className="w-full mt-[20px]"
                         style={{ height: "calc(100% - 60px)" }}
                     >
-
-                        <svg viewBox="0 0 600 260" className="w-full h-full" fill="none">
-
-                            <defs>
-
-                                <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-
-                                    <stop offset="0%" stopColor="rgba(255,255,255,0.35)" />
-
-                                    <stop offset="100%" stopColor="rgba(255,255,255,0)" />
-
-                                </linearGradient>
-
-                            </defs>
-
-                            <path
-                                d="M0 40 C40 20,40 80,70 70 C120 40,90 170,160 140 C220 100,240 170,300 100 C360 40,400 220,450 120 C500 60,540 150,600 60 L600 260 L0 260 Z"
-                                fill="url(#grad)"
-                            />
-
-                            <path
-                                d="M0 40 C40 20,40 80,70 70 C120 40,90 170,160 140 C220 100,240 170,300 100 C360 40,400 220,450 120 C500 60,540 150,600 60"
-                                stroke="#0D1D25"
-                                strokeWidth="3"
-                            />
-
-                            <line
-                                x1="300"
-                                y1="10"
-                                x2="300"
-                                y2="245"
-                                stroke="white"
-                                strokeWidth="1.5"
-                                strokeDasharray="4 3"
-                            />
-
-                            <circle
-                                cx="300"
-                                cy="100"
-                                r="8"
-                                fill="#F6D1B7"
-                                stroke="white"
-                                strokeWidth="3"
-                            />
-
-                        </svg>
-
+                        <Line data={grafikData} options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: { ticks: { display: false }, grid: { color: "rgba(255,255,255,0.1)" } },
+                                y: { ticks: { color: "white" }, grid: { color: "rgba(255,255,255,0.1)" } },
+                            },
+                        }}
+                        />
                     </div>
-
                 </div>
 
                 {/* RIWAYAT */}
