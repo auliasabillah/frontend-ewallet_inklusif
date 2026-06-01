@@ -1,83 +1,146 @@
+import axios from "axios";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const konfirmasipembayaran = () => {
+const KonfirmasiPembayaran = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
   const data = state || {
     nominal: 0,
-    metode: "-",
-    id: "-",
-    waktu: "-",
-    jenis: "-",
+    metode: "QRIS",
+    id: "TRX001",
+    waktu: new Date().toLocaleString("id-ID"),
+    jenis: "Pembayaran QRIS",
+    saldoAwal: 198215006,
   };
 
+  const saldoAkhir = data.saldoAkhir;
+  const handleBayar = async () => {
+      try {
+
+        const user = JSON.parse(
+        localStorage.getItem("user")
+      );
+
+      await axios.post(
+        "http://127.0.0.1:8000/api/payment",
+      {
+        user_id: user.id,
+        nominal: data.nominal,
+        metode: "QRIS",
+      }
+      );
+
+      alert("Pembayaran berhasil");
+
+      navigate("/beranda");
+
+      } catch (error) {
+
+        console.log(error);
+
+        alert("Pembayaran gagal");
+
+      }
+    };
+
   return (
-    <div className="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div className="bg-[#f5f7fb] min-h-screen flex items-center justify-center p-5">
 
-      <div className="w-[500px] bg-white rounded shadow-md overflow-hidden">
+      <div className="w-full max-w-xl bg-white rounded-3xl shadow-lg overflow-hidden">
 
-        <div className="bg-[#1F6F78] text-white px-6 py-4 text-lg font-semibold">
-          Konfirmasi Pembayaran
+        {/* HEADER */}
+        <div className="bg-[#0D6B73] text-white px-6 py-5">
+          <h1 className="text-xl font-bold">
+            Pembayaran Berhasil
+          </h1>
         </div>
 
-        <div className="p-6 text-center">
+        <div className="p-6">
 
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-3xl">✔</span>
+          {/* ICON */}
+          <div className="flex justify-center mb-5">
+
+            <div className="w-24 h-24 rounded-full bg-green-100 flex items-center justify-center text-5xl">
+              ✅
             </div>
+
           </div>
 
-          <h2 className="text-lg font-bold mb-1">Pembayaran Berhasil!</h2>
+          <h2 className="text-center text-3xl font-bold mb-2">
+            Transaksi Berhasil
+          </h2>
 
-          <p className="text-gray-500 text-sm mb-4">
-            Terima Kasih, pembayaran anda telah berhasil diverifikasi.
+          <p className="text-center text-gray-500 mb-6">
+            Pembayaran QRIS berhasil diproses
           </p>
 
-          <div className="bg-green-100 border border-green-400 rounded-lg py-3 mb-5">
-            <p className="text-sm">Nominal Top Up</p>
-            <p className="text-green-700 text-xl font-bold">
-              Rp {data.nominal.toLocaleString("id-ID")}
+          {/* TOTAL */}
+          <div className="bg-green-50 border border-green-200 rounded-2xl p-5 text-center mb-6">
+
+            <p className="text-gray-500">
+              Total Pembayaran
             </p>
+
+            <h1 className="text-4xl font-bold text-green-700 mt-2">
+              Rp {data.nominal.toLocaleString("id-ID")}
+            </h1>
+
           </div>
 
-          <div className="border rounded-lg text-sm text-left mb-4">
+          {/* DETAIL */}
+          <div className="border rounded-2xl overflow-hidden mb-6">
 
-            <div className="flex justify-between px-4 py-2 border-b">
-              <span>Jenis</span>
+            <div className="flex justify-between p-4 border-b">
+              <span>Jenis Transaksi</span>
               <span>{data.jenis}</span>
             </div>
 
-            <div className="flex justify-between px-4 py-2 border-b">
+            <div className="flex justify-between p-4 border-b">
               <span>Metode</span>
               <span>{data.metode}</span>
             </div>
 
-            <div className="flex justify-between px-4 py-2 border-b">
-              <span>ID</span>
+            <div className="flex justify-between p-4 border-b">
+              <span>ID Transaksi</span>
               <span>{data.id}</span>
             </div>
 
-            <div className="flex justify-between px-4 py-2">
+            <div className="flex justify-between p-4 border-b">
               <span>Waktu</span>
               <span>{data.waktu}</span>
             </div>
 
+            <div className="flex justify-between p-4 border-b">
+              <span>Saldo Sebelum</span>
+              <span>
+                Rp {data.saldoAwal.toLocaleString("id-ID")}
+              </span>
+            </div>
+
+            <div className="flex justify-between p-4 bg-red-50">
+              <span>Saldo Sesudah</span>
+              <span className="font-bold text-red-600">
+                Rp {saldoAkhir.toLocaleString("id-ID")}
+              </span>
+            </div>
+
           </div>
 
+          {/* BUTTON */}
           <button
-            onClick={() => navigate("/beranda")}
-            className="w-full bg-[#1F6F78] text-white py-2 rounded mb-2"
+            onClick={handleBayar}
+            className="w-full bg-[#0D6B73] text-white py-4 rounded-2xl font-semibold"
           >
-            Kembali Ke Beranda
+            Selesaikan Pembayaran
           </button>
-
         </div>
+
       </div>
+
     </div>
   );
 };
 
-export default konfirmasipembayaran;
+export default KonfirmasiPembayaran;

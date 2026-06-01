@@ -1,394 +1,167 @@
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DetailPembayaran() {
-
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const nominal = location.state?.nominal || 200000;
-  const metode = location.state?.metode || "QRIS";
+  const [nominal, setNominal] = useState("");
 
-  const [showSuccess, setShowSuccess] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const [saldo, setSaldo] = useState(0);
+
+  useEffect(() => {
+    if (user?.id) {
+      axios
+        .get(`http://127.0.0.1:8000/api/saldo/${user.id}`)
+        .then((res) => setSaldo(res.data.saldo))
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  const handlePembayaran = async () => {
+    try {
+      if (!nominal || Number(nominal) <= 0) {
+        alert("Masukkan nominal pembayaran");
+        return;
+      }
+
+      const res = await axios.post(
+        "http://127.0.0.1:8000/api/payment",
+        {
+          user_id: user.id,
+          nominal: Number(nominal),
+          metode: "QRIS",
+        }
+      );
+
+      navigate("/konfirmasipembayaran", {
+        state: {
+          nominal: Number(nominal),
+          metode: "QRIS",
+          id: res.data.id_transaksi,
+          waktu: new Date().toLocaleString("id-ID"),
+          jenis: "Pembayaran QRIS",
+          saldoAwal: saldo,
+          saldoAkhir: res.data.saldo,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      alert(err.response?.data?.message || "Pembayaran gagal");
+    }
+  };
 
   return (
-
     <div className="min-h-screen bg-[#f5f7fb]">
 
-      {/* ================= HEADER ================= */}
-      <div className="bg-[#1F6F78] text-white p-5 flex items-center gap-4 shadow">
-
-        <span
+      <div className="bg-[#0D6B73] text-white px-6 py-4 flex items-center gap-4 shadow">
+        <button
           onClick={() => navigate(-1)}
-          className="cursor-pointer text-2xl hover:opacity-80 transition"
+          className="text-2xl"
         >
           ←
-        </span>
+        </button>
 
-        <h1 className="font-semibold text-2xl">
+        <h1 className="text-2xl font-semibold">
           Detail Pembayaran
         </h1>
-
       </div>
 
-      {/* ================= CONTENT ================= */}
-      <div className="p-8 max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
+      <div className="max-w-4xl mx-auto py-10 px-5">
 
-        {/* ================= LEFT ================= */}
-        <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 p-6 space-y-5">
+        <div className="text-center mb-10">
 
-          <div>
-
-            <h2 className="font-bold text-2xl text-gray-800">
-              Detail Pembayaran
-            </h2>
-
-            <p className="text-sm text-gray-500 mt-1">
-              Periksa kembali informasi pembayaran sebelum melanjutkan
-            </p>
-
+          <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto text-4xl">
+            ✅
           </div>
 
-          {/* CARD */}
-          <div className="bg-gradient-to-r from-[#1F6F78] via-[#278892] to-cyan-500 rounded-[30px] p-6 text-white shadow-xl relative overflow-hidden">
+          <h2 className="text-4xl font-bold mt-5">
+            QR Berhasil Dipindai
+          </h2>
 
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full"></div>
+          <p className="text-gray-500 mt-2">
+            Masukkan nominal pembayaran
+          </p>
 
-            <div className="relative z-10">
+        </div>
 
-              <p className="text-sm opacity-80">
-                Total Pembayaran
-              </p>
+        <div className="bg-white rounded-3xl shadow-sm border p-6">
 
-              <h1 className="text-5xl font-bold mt-3">
-                Rp {(nominal + 1500).toLocaleString("id-ID")}
-              </h1>
+          <h3 className="text-2xl font-bold text-[#0D6B73] mb-5">
+            Nominal Pembayaran
+          </h3>
 
-              <div className="flex gap-3 mt-5">
+          <input
+            type="number"
+            value={nominal}
+            onChange={(e) => setNominal(e.target.value)}
+            placeholder="Masukkan nominal pembayaran"
+            className="w-full border rounded-2xl p-4 text-xl outline-none"
+          />
 
-                <div className="bg-white/20 px-4 py-2 rounded-full text-sm">
-                  Admin Rp 1.500
-                </div>
+        </div>
 
-                <div className="bg-yellow-300 text-yellow-900 px-4 py-2 rounded-full text-sm font-semibold">
-                  Menunggu
-                </div>
+        <div className="bg-white rounded-3xl shadow-sm border p-6 mt-6 flex justify-between">
 
-              </div>
+          <span className="font-semibold text-xl">
+            Saldo Anda
+          </span>
 
-            </div>
+          <span className="text-2xl font-bold text-[#0D6B73]">
+            Rp {Number(saldo).toLocaleString("id-ID")}
+          </span>
 
+        </div>
+
+        <div className="bg-white rounded-3xl shadow-sm border p-6 mt-6">
+
+          <h3 className="text-2xl font-bold text-[#0D6B73] mb-5">
+            Detail Pembayaran
+          </h3>
+
+          <div className="flex justify-between mb-4">
+            <span>Nominal</span>
+            <span>
+              Rp {Number(nominal || 0).toLocaleString("id-ID")}
+            </span>
           </div>
 
-          {/* DETAIL */}
-          <div className="border rounded-[28px] p-5 space-y-4">
+          <div className="flex justify-between mb-4">
+            <span>Biaya Admin</span>
+            <span>Rp 0</span>
+          </div>
 
-            <p className="font-semibold text-[#1F6F78] text-lg">
-              Ringkasan Pembayaran
-            </p>
+          <hr className="my-4" />
 
-            <div className="flex justify-between text-sm">
-
-              <span className="text-gray-500">
-                Jenis Transaksi
-              </span>
-
-              <span className="font-medium">
-                Top Up Saldo
-              </span>
-
-            </div>
-
-            <div className="flex justify-between text-sm">
-
-              <span className="text-gray-500">
-                Nominal
-              </span>
-
-              <span className="font-semibold text-[#1F6F78]">
-                Rp {nominal.toLocaleString("id-ID")}
-              </span>
-
-            </div>
-
-            <div className="flex justify-between text-sm">
-
-              <span className="text-gray-500">
-                Metode
-              </span>
-
-              <span className="font-medium">
-                {metode}
-              </span>
-
-            </div>
-
-            <div className="flex justify-between text-sm">
-
-              <span className="text-gray-500">
-                Biaya Admin
-              </span>
-
-              <span className="font-medium">
-                Rp 1.500
-              </span>
-
-            </div>
-
-            <hr />
-
-            <div className="flex justify-between font-semibold text-lg">
-
-              <span>
-                Total Pembayaran
-              </span>
-
-              <span className="text-[#1F6F78]">
-                Rp {(nominal + 1500).toLocaleString("id-ID")}
-              </span>
-
-            </div>
-
+          <div className="flex justify-between text-2xl font-bold">
+            <span>Total Bayar</span>
+            <span className="text-[#0D6B73]">
+              Rp {Number(nominal || 0).toLocaleString("id-ID")}
+            </span>
           </div>
 
         </div>
 
-        {/* ================= RIGHT ================= */}
-        <div className="bg-white rounded-[32px] shadow-sm border border-gray-100 p-6 text-center space-y-6 h-fit">
+        <div className="bg-blue-50 border border-blue-100 rounded-3xl p-5 mt-6">
 
-          {/* TITLE */}
-          <div className="bg-[#1F6F78] text-white py-4 rounded-2xl text-lg font-semibold">
-
-            {metode === "QRIS"
-              ? "Scan QRIS untuk Pembayaran"
-              : "Transfer ke Rekening Berikut"}
-
-          </div>
-
-          {/* QRIS */}
-          {metode === "QRIS" ? (
-
-            <div className="space-y-5">
-
-              <div className="w-72 h-72 bg-gray-100 mx-auto flex items-center justify-center rounded-[32px] shadow-inner text-6xl">
-
-                QR
-
-              </div>
-
-              <div className="bg-blue-50 text-blue-700 p-4 rounded-2xl text-sm">
-
-                Scan QR menggunakan aplikasi e-wallet atau mobile banking untuk menyelesaikan pembayaran.
-
-              </div>
-
-            </div>
-
-          ) : (
-
-            /* TRANSFER */
-            <div className="text-left space-y-5 text-sm">
-
-              <div>
-
-                <p className="text-gray-500">
-                  Bank
-                </p>
-
-                <p className="font-semibold text-lg">
-                  BCA - Bank Central Asia
-                </p>
-
-              </div>
-
-              <div>
-
-                <p className="text-gray-500">
-                  Nomor Rekening
-                </p>
-
-                <p className="font-semibold text-lg">
-                  1234 5678 9012
-                </p>
-
-              </div>
-
-              <div>
-
-                <p className="text-gray-500">
-                  Nama Penerima
-                </p>
-
-                <p className="font-semibold text-lg">
-                  Zefanya Angelica
-                </p>
-
-              </div>
-
-              <div className="bg-blue-50 text-blue-700 p-4 rounded-2xl text-sm">
-
-                Pastikan transfer sesuai nominal agar pembayaran dapat diverifikasi otomatis.
-
-              </div>
-
-            </div>
-
-          )}
-
-          {/* TRANSACTION */}
-          <div className="bg-gray-50 rounded-[24px] p-5 border">
-
-            <p className="text-sm text-gray-500">
-              ID Transaksi
-            </p>
-
-            <p className="font-bold text-[#1F6F78] text-xl mt-1">
-              TRX001
-            </p>
-
-          </div>
-
-          {/* BUTTON */}
-          <div className="grid grid-cols-2 gap-4">
-
-            <button
-              onClick={() => navigate(-1)}
-              className="border border-gray-300 py-4 rounded-2xl font-semibold text-lg hover:bg-gray-50 transition-all"
-            >
-
-              Kembali
-
-            </button>
-
-            <button
-              onClick={() => setShowSuccess(true)}
-              className="bg-[#1F6F78] text-white py-4 rounded-2xl font-semibold text-lg shadow-lg hover:scale-[1.01] transition-all"
-            >
-
-              Saya Sudah Bayar
-
-            </button>
-
-          </div>
-
-          {/* CANCEL */}
-          <button className="w-full border border-red-500 text-red-500 py-4 rounded-2xl font-semibold hover:bg-red-50 transition-all">
-
-            Batalkan Transaksi
-
-          </button>
+          <p className="text-blue-700 font-semibold">
+            Pastikan nominal pembayaran sudah sesuai sebelum melanjutkan transaksi.
+          </p>
 
         </div>
+
+        <button
+          onClick={handlePembayaran}
+          className="w-full mt-8 bg-[#0D6B73] text-white py-5 rounded-3xl text-xl font-semibold"
+        >
+          Lanjutkan Pembayaran
+        </button>
 
       </div>
-
-      {/* ================= SUCCESS MODAL ================= */}
-      {showSuccess && (
-
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
-
-          <div className="bg-white rounded-[40px] p-10 w-full max-w-lg shadow-2xl text-center relative overflow-hidden">
-
-            {/* EFFECT */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-green-100 rounded-full opacity-40"></div>
-
-            <div className="relative z-10">
-
-              {/* ICON */}
-              <div className="w-28 h-28 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center text-6xl mx-auto shadow-xl">
-
-                ✅
-
-              </div>
-
-              {/* TITLE */}
-              <h1 className="text-4xl font-bold text-gray-800 mt-8">
-                Pembayaran Berhasil
-              </h1>
-
-              <p className="text-gray-500 mt-3 text-lg leading-relaxed">
-                Pembayaran berhasil diverifikasi oleh sistem.
-              </p>
-
-              {/* DETAIL */}
-              <div className="bg-gray-50 rounded-[30px] p-6 mt-8 text-left space-y-5 border">
-
-                <div className="flex justify-between">
-
-                  <span className="text-gray-500">
-                    Metode
-                  </span>
-
-                  <span className="font-semibold">
-                    {metode}
-                  </span>
-
-                </div>
-
-                <div className="flex justify-between">
-
-                  <span className="text-gray-500">
-                    Nominal
-                  </span>
-
-                  <span className="font-semibold">
-                    Rp {nominal.toLocaleString("id-ID")}
-                  </span>
-
-                </div>
-
-                <div className="flex justify-between">
-
-                  <span className="text-gray-500">
-                    Biaya Admin
-                  </span>
-
-                  <span className="font-semibold">
-                    Rp 1.500
-                  </span>
-
-                </div>
-
-                <div className="border-t pt-4 flex justify-between">
-
-                  <span className="font-bold text-lg">
-                    Total Pembayaran
-                  </span>
-
-                  <span className="font-bold text-2xl text-[#1F6F78]">
-                    Rp {(nominal + 1500).toLocaleString("id-ID")}
-                  </span>
-
-                </div>
-
-              </div>
-
-              {/* STATUS */}
-              <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mt-6 text-green-700">
-
-                Saldo/top up akan masuk otomatis dalam beberapa detik.
-
-              </div>
-
-              {/* BUTTON */}
-              <button
-                onClick={() => navigate("/")}
-                className="w-full mt-8 bg-[#1F6F78] text-white py-5 rounded-3xl font-semibold text-lg shadow-lg hover:scale-[1.01] transition-all"
-              >
-
-                Selesai
-
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      )}
 
     </div>
-
   );
 }
+

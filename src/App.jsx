@@ -6,6 +6,7 @@ import Login from "./pages/user/login.jsx";
 import Register from "./pages/user/register.jsx";
 import Beranda from "./pages/user/beranda.jsx";
 import Profil from "./pages/user/profile.jsx";
+
 import IsiSaldo from "./pages/user/IsiSaldo/isisaldo.jsx";
 import IsiSaldoMinimarket from "./pages/user/IsiSaldo/isisaldominimarket.jsx";
 import IsiSaldoBank from "./pages/user/IsiSaldo/isisaldobank.jsx";
@@ -14,12 +15,17 @@ import IsiSaldoKartu from "./pages/user/IsiSaldo/isisaldokartu.jsx";
 import DetailPembayaranKartu from "./pages/user/IsiSaldo/detailpembayarankartu.jsx";
 import KonfirmasiMinimarket from "./pages/user/IsiSaldo/konfirmasiminimarket.jsx";
 import KonfirmasiKartuDebit from "./pages/user/IsiSaldo/konfirmasiKartuDebit.jsx";
+
 import GrafikPengeluaran from "./pages/user/grafikPengeluaran.jsx";
+
 import Transfer from "./pages/user/transfer.jsx";
 import KonfirmasiTransfer from "./pages/user/KonfirmasiTransfer.jsx";
+
 import Pembayaran from "./pages/user/pembayaran.jsx";
-import PembayaranDetail from "./pages/user/PembayaranDetail.jsx";
+import DetailPembayaranQR from "./pages/user/detailpembayaran.jsx";
+import KonfirmasiPembayaran from "./pages/user/konfirmasipembayaran.jsx";
 import SuksesPembayaran from "./pages/user/SuksesPembayaran.jsx";
+
 import RiwayatTransaksi from "./pages/user/riwayattransaksi.jsx";
 
 /* ADMIN */
@@ -41,6 +47,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/beranda" element={<Beranda />} />
         <Route path="/profile" element={<Profil />} />
+
+        {/* ISI SALDO */}
         <Route path="/isisaldo" element={<IsiSaldo />} />
         <Route path="/isisaldominimarket" element={<IsiSaldoMinimarket />} />
         <Route path="/isisaldobank" element={<IsiSaldoBank />} />
@@ -49,12 +57,21 @@ function App() {
         <Route path="/detailpembayarankartu" element={<DetailPembayaranKartu />} />
         <Route path="/konfirmasiminimarket" element={<KonfirmasiMinimarket />} />
         <Route path="/konfirmasikartudebit" element={<KonfirmasiKartuDebit />} />
+
+        {/* GRAFIK */}
         <Route path="/grafikpengeluaran" element={<GrafikPengeluaran />} />
+
+        {/* TRANSFER */}
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/konfirmasi-transfer" element={<KonfirmasiTransfer />} />
+
+        {/* PEMBAYARAN QR */}
         <Route path="/pembayaran" element={<Pembayaran />} />
-        <Route path="/detail-pembayaran" element={<PembayaranDetail />} />
-        <Route path="/konfirmasipembayaran" element={<SuksesPembayaran />} />
+        <Route path="/detail-pembayaran" element={<DetailPembayaranQR />} />
+        <Route path="/konfirmasipembayaran" element={<KonfirmasiPembayaran />} />
+        <Route path="/suksespembayaran" element={<SuksesPembayaran />} />
+
+        {/* RIWAYAT */}
         <Route path="/riwayat" element={<RiwayatTransaksi />} />
 
         {/* ADMIN */}
