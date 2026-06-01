@@ -33,7 +33,7 @@ function Beranda() {
             .catch((err) => console.log(err));
         const bulan = new Date().getMonth() + 1;
         
-        axios.get(`http://127.0.0.1:8000/api/pengeluaran/${user?.id}?bulan=${bulan}`)
+        axios.get(`http://127.0.0.1:8000/api/pengeluaran-harian/${user?.id}`)
         .then((res) => {
             setGrafikData({
                 labels: Object.keys(res.data),
