@@ -16,34 +16,9 @@ const KonfirmasiPembayaran = () => {
   };
 
   const saldoAkhir = data.saldoAkhir;
-  const handleBayar = async () => {
-      try {
-
-        const user = JSON.parse(
-        localStorage.getItem("user")
-      );
-
-      await axios.post(
-        "http://127.0.0.1:8000/api/payment",
-      {
-        user_id: user.id,
-        nominal: data.nominal,
-        metode: "QRIS",
-      }
-      );
-
-      alert("Pembayaran berhasil");
-
-      navigate("/beranda");
-
-      } catch (error) {
-
-        console.log(error);
-
-        alert("Pembayaran gagal");
-
-      }
-    };
+  const handleBeranda = () => {
+    navigate("/beranda");
+  };
 
   return (
     <div className="bg-[#f5f7fb] min-h-screen flex items-center justify-center p-5">
@@ -130,10 +105,10 @@ const KonfirmasiPembayaran = () => {
 
           {/* BUTTON */}
           <button
-            onClick={handleBayar}
+            onClick={handleBeranda}
             className="w-full bg-[#0D6B73] text-white py-4 rounded-2xl font-semibold"
           >
-            Selesaikan Pembayaran
+            Kembali ke beranda
           </button>
         </div>
 
