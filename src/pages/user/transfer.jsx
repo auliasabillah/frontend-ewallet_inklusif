@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ export default function Transfer() {
     warna: "from-blue-600 via-sky-500 to-cyan-400",
     logo: "🏦",
   });
+
   const [showBank, setShowBank] = useState(false);
   const [rekening, setRekening] = useState("");
   const [nama, setNama] = useState("");
@@ -15,139 +16,57 @@ export default function Transfer() {
   const [catatan, setCatatan] = useState("");
   const [showConfirm, setShowConfirm] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showPin, setShowPin] = useState(false);
+  const [pin, setPin] = useState("");
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user'));
+  const [saldo, setSaldo] = useState(0);
+  useEffect(() => {
+  axios
+    .get(`http://127.0.0.1:8000/api/saldo/${user?.id}`)
+    .then((res) => setSaldo(res.data.saldo))
+    .catch((err) => console.log(err));
+  }, []);
 
   return (
 
+    <div className="min-h-screen bg-[#f5f7fb]">
+
+    <div className="bg-[#126B7D] text-white p-4 flex items-center gap-3">
+      <button
+        onClick={() => navigate(-1)}
+        className="text-2xl"
+      >
+       ←
+      </button>
+
+      <h1 className="font-semibold text-xl">
+        Transfer Bank
+      </h1>
+    </div>
+
     <div className="min-h-screen bg-[#f5f7fb] px-8 py-10">
 
-      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-8">
+      <div className="max-w-3xl mx-auto">
 
-        {/* ================= LEFT ================= */}
-        <div className="space-y-6">
-
-          {/* HEADER */}
-          <div className="flex items-center justify-between">
-
-            <div>
-
-          {/* BACK BUTTON */}
-          <button
-            onClick={() => navigate("/beranda")}
-            className="mb-4 flex items-center gap-2 text-gray-600 hover:text-[#1F6F78] transition-all"
-  >
-
-          <div className="w-10 h-10 rounded-2xl bg-white shadow flex items-center justify-center text-lg">
-              ←
-          </div>
-
-          <span className="font-medium">
-            Kembali
-          </span>
-
-          </button>
-
-          <p className="text-sm text-gray-500">
-            Transfer Bank
-          </p>
-
-        <h1 className="text-4xl font-bold text-gray-800 mt-1">
-            Kirim Uang
-          </h1>
-
-        </div>
-
-            <div className="w-14 h-14 rounded-3xl bg-white shadow flex items-center justify-center text-2xl">
-              💸
-            </div>
-
-          </div>
-
-          {/* CARD */}
-          <div
-            className={`bg-gradient-to-br ${selectedBank.warna} rounded-[36px] p-7 text-white shadow-2xl relative overflow-hidden transition-all duration-500`}
-          >
-
-            <div className="absolute -top-10 -right-10 w-52 h-52 bg-white/10 rounded-full"></div>
-
-            <div className="relative z-10">
-
-              <div className="flex justify-between items-start">
-
-                <div>
-
-                  <p className="text-xs opacity-80 tracking-widest uppercase">
-                    Transfer Bank
-                  </p>
-
-                  <h2 className="text-4xl font-bold mt-2">
-                    {selectedBank.nama}
-                  </h2>
-
-                </div>
-
-                <div className="w-20 h-20 rounded-[28px] bg-white/20 backdrop-blur-md flex items-center justify-center text-4xl shadow-lg">
-                  {selectedBank.logo}
-                </div>
-
-              </div>
-
-              <div className="bg-white/10 backdrop-blur-md rounded-[30px] p-6 mt-8 border border-white/10 space-y-6">
-
-                <div>
-
-                  <p className="text-sm opacity-80">
-                    Nomor Rekening
-                  </p>
-
-                  <h3 className="text-3xl font-bold mt-2 tracking-[4px]">
-                    {rekening || "•••• •••• ••••"}
-                  </h3>
-
-                </div>
-
-                <div>
-
-                  <p className="text-sm opacity-80">
-                    Nama Penerima
-                  </p>
-
-                  <p className="font-semibold text-2xl mt-1">
-                    {nama || "-"}
-                  </p>
-
-                </div>
-
-                <div className="flex justify-between items-center">
-
-                  <span className="opacity-80 text-lg">
-                    Nominal
-                  </span>
-
-                  <span className="font-bold text-2xl">
-                    {nominal
-                      ? `Rp ${Number(nominal).toLocaleString("id-ID")}`
-                      : "-"}
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
+      
         {/* ================= RIGHT ================= */}
-        <div className="bg-white rounded-[36px] p-8 shadow-sm border border-gray-100 space-y-6 h-fit">
+        <div className="bg-white rounded-[36px] p-8 shadow-sm border border-gray-100 space-y-6">
 
           <div className="flex items-center justify-between">
 
             <div>
+
+              <div className="bg-teal-50 border border-teal-100 rounded-2xl p-4 mb-6">
+                <p className="text-gray-500 text-sm">
+                    Saldo Anda
+                </p>
+
+                 <h2 className="text-3xl font-bold text-[#126B7D]">
+                     Rp {Number(saldo).toLocaleString("id-ID")}
+                  </h2>
+                </div>
 
               <h3 className="font-bold text-3xl text-gray-800">
                 Data Transfer
@@ -333,6 +252,16 @@ export default function Transfer() {
             </div>
 
           </div>
+          <div className="bg-yellow-50 border border-yellow-200 rounded-3xl p-4">
+
+          <p className="text-yellow-700 text-sm">
+
+            ⚠️ Pastikan nomor rekening dan nama penerima sudah benar.
+            Transfer yang berhasil tidak dapat dibatalkan.
+
+          </p>
+
+        </div>
 
           {/* BUTTON */}
           <button
@@ -440,6 +369,30 @@ export default function Transfer() {
 
               </div>
 
+              <div className="flex justify-between">
+
+                <span className="text-gray-500">
+                Saldo Saat Ini
+              </span>
+
+                <span className="font-semibold">
+                  Rp {Number(saldo).toLocaleString("id-ID")}
+                </span>
+
+          </div>
+
+          <div className="flex justify-between">
+
+            <span className="text-gray-500">
+                Sisa Saldo
+            </span>
+
+            <span className="font-semibold text-red-500">
+              Rp {(saldo - (Number(nominal || 0) + 2500)).toLocaleString("id-ID")}
+            </span>
+
+        </div>
+
               <div className="border-t pt-5 flex justify-between">
 
                 <span className="font-bold text-lg">
@@ -490,8 +443,10 @@ export default function Transfer() {
                       rekening: rekening,
                       catatan: catatan,
                     });
+
                     setShowConfirm(false);
-                    setSuccess(true);
+                    setShowPin(true);
+
                   } catch (error) {
                     alert(error.response?.data?.message || "Transfer gagal");
                     setShowConfirm(false);
@@ -511,6 +466,79 @@ export default function Transfer() {
         </div>
 
       )}
+
+              {/* ================= MODAL PIN ================= */}
+  {showPin && (
+
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div className="bg-white rounded-3xl p-8 w-[420px] shadow-xl">
+
+      <div className="flex justify-between items-center">
+
+        <h2 className="text-2xl font-bold">
+          Masukkan PIN
+        </h2>
+
+        <button
+          onClick={() => setShowPin(false)}
+          className="text-gray-500 text-xl"
+        >
+          ✕
+        </button>
+
+      </div>
+
+      <p className="text-gray-500 mt-3 text-center">
+        Masukkan PIN Anda untuk melanjutkan transfer
+      </p>
+
+      <input
+        type="password"
+        maxLength="6"
+        value={pin}
+        onChange={(e) => setPin(e.target.value)}
+        placeholder="******"
+        className="w-full border rounded-2xl p-4 mt-6 text-center text-2xl tracking-[10px]"
+      />
+
+      <p className="text-center text-[#126B7D] mt-4 cursor-pointer">
+        Lupa PIN?
+      </p>
+
+      <div className="grid grid-cols-2 gap-3 mt-6">
+
+        <button
+          onClick={() => setShowPin(false)}
+          className="border rounded-2xl py-3"
+        >
+          Batal
+        </button>
+
+        <button
+          onClick={() => {
+
+            if(pin.length !== 6){
+              alert("PIN harus 6 digit");
+              return;
+            }
+
+            setShowPin(false);
+            setSuccess(true);
+
+          }}
+          className="bg-[#126B7D] text-white rounded-2xl py-3"
+        >
+          Konfirmasi
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+)}
 
       {/* ================= SUCCESS ================= */}
       {success && (
@@ -586,9 +614,11 @@ export default function Transfer() {
 
         </div>
 
-      )}
+            )}
 
-    </div>
+        </div>
 
-  );
-}
+      </div>
+
+    );
+  }

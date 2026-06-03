@@ -25,6 +25,44 @@ export default function RiwayatTransaksi() {
     return "text-white";
   };
 
+        const filterTanggal = (items) => {
+  const sekarang = new Date();
+
+  return items.filter((item) => {
+    const tanggal = new Date(item.created_at);
+
+    if (filter2 === "Semua Waktu") {
+      return true;
+    }
+
+    if (filter2 === "Hari Ini") {
+      return (
+        tanggal.toDateString() ===
+        sekarang.toDateString()
+      );
+    }
+
+    if (filter2 === "Minggu Ini") {
+      const selisih =
+        (sekarang - tanggal) /
+        (1000 * 60 * 60 * 24);
+
+      return selisih <= 7;
+    }
+
+    if (filter2 === "Bulan Ini") {
+      return (
+        tanggal.getMonth() ===
+          sekarang.getMonth() &&
+        tanggal.getFullYear() ===
+          sekarang.getFullYear()
+      );
+    }
+
+    return true;
+  });
+};
+
   const [data, setData] = useState([]);
   const user = JSON.parse(localStorage.getItem('user'));
   useEffect(() => {
@@ -44,9 +82,19 @@ export default function RiwayatTransaksi() {
             ? 'Top Up Saldo'
             : 'Transfer Keluar',
           desc: tx.deskripsi || '-',
-          amount: 'Rp ' + Number(tx.nominal).toLocaleString('id-ID'),
-          status: tx.jenis,
-          type: tx.jenis === 'pemasukan' ? 'topup' : 'keluar',
+           amount:
+          
+       "Rp " +
+        Number(tx.nominal).toLocaleString("id-ID"),
+
+        status: tx.jenis,
+
+        type:
+          tx.jenis === "pemasukan"
+          ? "topup"
+            : "keluar",
+
+          created_at: tx.created_at,
         });
       });
       const result = Object.keys(grouped).map(g => ({ group: g, items: grouped[g] }));
@@ -113,7 +161,7 @@ export default function RiwayatTransaksi() {
 
             {open2 && (
               <div className="absolute w-full bg-white mt-1 rounded shadow z-10">
-                {["Hari Ini", "Minggu Ini", "Bulan Ini"].map((item) => (
+                {["Semua Waktu", "Hari Ini", "Minggu Ini", "Bulan Ini"].map((item) => (
                   <div
                     key={item}
                     onClick={() => {
@@ -133,7 +181,10 @@ export default function RiwayatTransaksi() {
 
         {/* LIST */}
         {data.map((group, i) => {
-          const filteredItems = filterData(group.items);
+          const filteredItems = filterTanggal(
+          filterData(group.items)
+          );
+
           if (filteredItems.length === 0) return null;
 
           return (
