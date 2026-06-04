@@ -31,8 +31,8 @@ function DetailPembayaranMinimarket() {
                 alert("Top up gagal");
             }
         };
-    const [timer, setTimer] = useState(24*60*60);
-    useEffect(() => {
+        const [timer, setTimer] = useState(24*60*60);
+        useEffect(() => {
         const interval = setInterval(() => {
             setTimer(prev => {
                 if (prev <= 0) {
@@ -43,8 +43,8 @@ function DetailPembayaranMinimarket() {
             });
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
-    const formatTimer = (detik) => {
+        }, []);
+        const formatTimer = (detik) => {
         const jam = Math.floor(detik / 3600);
         const menit = Math.floor((detik % 3600) / 60);
         const sisa = detik % 60;

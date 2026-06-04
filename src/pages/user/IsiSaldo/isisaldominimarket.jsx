@@ -23,7 +23,7 @@ function IsiSaldoMinimarket() {
     return (
     <div className="min-h-screen bg-white">
         <div className="bg-[#126B7D] text-white px-6 py-4 flex items-center gap-3">
-            <span onClick={() => navigate("/beranda")} className="text-2xl cursor-pointer">⬅︎</span>
+            <span onClick={() => navigate("/isisaldo")} className="text-2xl cursor-pointer">⬅︎</span>
             <h1 className="text-xl font-medium">Isi Saldo</h1>
         </div>
         <div className="px-8 py-6">

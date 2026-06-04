@@ -4,43 +4,37 @@ import debitKredit from "../../../assets/isisaldo/paypal.png";
 
 function DebitKredit() {
     const navigate = useNavigate();
-    const [bank, setBank] = useState("");
     const [nomorKartu, setNomorKartu] = useState("");
     const [nominal, setNominal] = useState("");
 
     return (
-        <div className="w-screen h-screen overflow-hidden bg-white">
-            <div className="w-full h-20 bg-[#126B7D] flex items-center px-6 gap-4 text-white">
-                <span onClick={() => navigate("/isisaldo")}className="text-2xl cursor-pointer">⬅︎</span>
-                <h1 className="text-2xl font-light">Isi Saldo</h1>
+        <div className="w-screen h-screen overflow-hidden bg-[#f4f4f4]">
+            <div className="w-full h-16 bg-[#126B7D] flex items-center px-6 gap-4 text-white">
+                <span onClick={() => navigate("/isisaldo")} className="text-xl cursor-pointer">⬅︎</span>
+                <h1 className="text-lg font-medium">Isi Saldo</h1>
             </div>
-            <div className="w-full px-12 pt-6">
-                <h2 className="text-2xl mb-3">Metode Pembayaran</h2>
-                <div className="flex items-center gap-4 mb-6">
-                    <img src={debitKredit} className="w-8 h-8 object-contain"/>
-                    <span className="text-2xl">Kredit/Debit</span>
-                </div>
-                <div className="w-full border border-gray-400 rounded-2xl p-6 mt-12 bg-white">
-                    <div className="mb-6">
-                        <p className="text-xl font-semibold mb-3">Nama Bank</p>
-                        <select value={bank} onChange={(e) => setBank(e.target.value)} className="w-full h-14 border border-gray-400 rounded-xl px-5 text-xl outline-none bg-white cursor-pointer">
-                            <option value="BRI">BRI</option>
-                            <option value="BNI">BNI</option>
-                            <option value="BCA">BCA</option>
-                            <option value="Mandiri">Mandiri</option>
-                        </select>
+
+            <div className="max-w-4xl mx-auto mt-10 bg-white rounded-3xl shadow-lg p-10">
+                <h2 className="text-2xl font-bold text-center mb-8">Detail Pembayaran</h2>
+
+                <div className="flex items-center gap-3 mb-8 pb-6 mt-10 border-b border-gray-100">
+                    <img src={debitKredit} className="w-8 h-8 object-contain" />
+                    <div>
+                        <p className="block text-xl font-medium">Metode Pembayaran</p>
+                        <p className="text-lg font-semibold text-gray-700">Kredit / Debit</p>
                     </div>
-                    <div className="mb-6">
-                        <p className="text-xl font-semibold mb-3">Nomor Kartu</p>
-                        <input type="number" value={nomorKartu} onChange={(e) => setNomorKartu(e.target.value)} placeholder="Masukkan nomor kartu" className="w-full h-14 border border-gray-400 rounded-xl px-5 text-xl outline-none"/>
+                </div>
+
+                <div>
+                    <div>
+                        <label className="block text-lg font-medium text-gray-600 mb-2">Nomor Kartu</label>
+                        <input type="number" value={nomorKartu} onChange={(e) => setNomorKartu(e.target.value)} placeholder="Masukkan nomor kartu" className="w-full border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50 text-base outline-none focus:border-[#126B7D] focus:bg-white focus:ring-2 focus:ring-[#126B7D]/10 transition-all"/>
                     </div>
                     <div>
-                        <p className="text-xl font-semibold mb-3">Nominal Pembayaran</p>
-                        <input type="number" value={nominal} onChange={(e) => setNominal(e.target.value)} placeholder="Rp 0" className="w-full h-14 border border-gray-400 rounded-xl px-5 text-xl"/>
+                        <label className="block text-lg font-medium text-gray-600 mb-2 mt-4">Nominal Top-Up</label>
+                        <input type="number" value={nominal} onChange={(e) => setNominal(e.target.value)} placeholder="Rp 0" className="w-full border border-gray-200 rounded-xl px-4 py-3.5 bg-gray-50 text-base outline-none focus:border-[#126B7D] focus:bg-white focus:ring-2 focus:ring-[#126B7D]/10 transition-all"/>
                     </div>
-                </div>
-                <div className="flex justify-center mt-8">
-                    <button onClick={() => navigate("/detailpembayarankartu", {state: {bank: bank, nomorKartu: nomorKartu, nominal:nominal}})} className="w-[280px] h-14 bg-[#126B7D] text-white text-xl rounded-xl">Lanjutkan</button>
+                    <button onClick={() => navigate("/detailpembayarankartu", { state: { nomorKartu, nominal } })} className="w-full h-12 bg-[#126B7D] hover:opacity-90 active:scale-[0.98] text-white text-base font-bold rounded-2xl transition-all mt-10">Lanjutkan</button>
                 </div>
             </div>
         </div>

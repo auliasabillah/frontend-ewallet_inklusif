@@ -43,26 +43,19 @@ export default function DetailPembayaranKartu() {
     <div className="min-h-screen bg-[#f4f4f4]">
       
       {/* HEADER */}
-      <div className="bg-[#0E6B78] text-white py-4 px-6 flex items-center justify-between">
-        <button onClick={() => navigate(-1)} className="text-2xl">
-          ←
-        </button>
-
-        <h1 className="text-2xl font-bold">
-          Informasi Pembayaran
-        </h1>
-
-        <div>⋯</div>
+      <div className="w-full h-16 bg-[#126B7D] flex items-center px-6 gap-4 text-white">
+        <button onClick={() => navigate(-1)} className="text-xl cursor-pointer">⬅︎</button>
+        <h1 className="text-lg font-medium">Informasi Pembayaran</h1>
       </div>
 
       {/* CONTENT */}
       <div className="max-w-4xl mx-auto mt-10 bg-white rounded-3xl shadow-lg p-10">
 
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-2xl font-bold text-center mb-8">
           Konfirmasi Pembayaran
         </h2>
 
-        <div className="space-y-6">
+        <div className="space-y-6 mt-12">
 
           <div>
             <label className="block text-lg font-medium mb-2">

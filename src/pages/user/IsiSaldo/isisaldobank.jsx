@@ -19,7 +19,7 @@ function Bank() {
     return (
     <div className="min-h-screen bg-white">
         <div className="bg-[#126B7D] text-white px-5 py-4 flex items-center gap-3">
-            <span onClick={() => navigate("/beranda")} className="text-xl cursor-pointer">⬅︎</span>
+            <span onClick={() => navigate("/isisaldo")} className="text-xl cursor-pointer">⬅︎</span>
             <h1 className="text-lg">Isi Saldo</h1>
         </div>
         <div className="p-6">
