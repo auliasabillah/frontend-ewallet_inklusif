@@ -45,14 +45,14 @@ export default function DetailPembayaranKartu() {
       {/* HEADER */}
       <div className="w-full h-16 bg-[#126B7D] flex items-center px-6 gap-4 text-white">
         <button onClick={() => navigate(-1)} className="text-xl cursor-pointer">⬅︎</button>
-        <h1 className="text-lg font-medium">Informasi Pembayaran</h1>
+        <h1 className="text-lg font-medium">Konfirmasi Isi Saldo</h1>
       </div>
 
       {/* CONTENT */}
       <div className="max-w-4xl mx-auto mt-10 bg-white rounded-3xl shadow-lg p-10">
 
         <h2 className="text-2xl font-bold text-center mb-8">
-          Konfirmasi Pembayaran
+          Konfirmasi Isi Saldo
         </h2>
 
         <div className="space-y-6 mt-12">
@@ -102,7 +102,7 @@ export default function DetailPembayaranKartu() {
             disabled={loading}
             className="w-full bg-[#0E6B78] text-white py-4 rounded-2xl font-bold text-lg hover:opacity-90"
           >
-            {loading ? "Memproses..." : "Konfirmasi Pembayaran"}
+            {loading ? "Memproses..." : "Konfirmasi"}
           </button>
 
         </div>
