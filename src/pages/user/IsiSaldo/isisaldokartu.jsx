@@ -16,6 +16,7 @@ function DebitKredit() {
         alert("Silahkan masukkan nominal top up");
         return;
     }
+    navigate("/detailpembayarankartu", { state: { nomorKartu, nominal } });
     };
 
     return (
